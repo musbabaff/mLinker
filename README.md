@@ -1,13 +1,13 @@
-# 🔗 vxLinker
+# 🔗 mLinker
 
 **Minecraft ↔ Discord Hesap Eşleştirme ve Rol Senkronizasyon Eklentisi**
 
-[![Developer](https://img.shields.io/badge/Geliştirici-Velvexa-blue?style=flat-square)](https://github.com/musbabaff)
+[![Developer](https://img.shields.io/badge/Geliştirici-Musbabaff-blue?style=flat-square)](https://github.com/musbabaff)
 [![GitHub](https://img.shields.io/badge/GitHub-musbabaff-black?logo=github&style=flat-square)](https://github.com/musbabaff)
-[![Team](https://img.shields.io/badge/Takım-MineBazaar_Dev_Team-orange?style=flat-square)](#)
+[![Team](https://img.shields.io/badge/Takım-BlockStock-orange?style=flat-square)](#)
 [![Dependency](https://img.shields.io/badge/Bağımlılık-LuckPerms-lightgrey?style=flat-square)](https://luckperms.net/)
 
-**vxLinker**, Minecraft sunucunuzdaki oyuncuların Discord hesaplarını oyun içi hesaplarıyla eşleştirmelerini sağlayan gelişmiş bir köprü eklentisidir. **LuckPerms** entegrasyonu sayesinde, oyuncuların oyun içi yetki grupları (VIP, Rehber, vs.) anında Discord rollerine yansıtılır.
+**mLinker**, Minecraft sunucunuzdaki oyuncuların Discord hesaplarını oyun içi hesaplarıyla eşleştirmelerini sağlayan gelişmiş bir köprü eklentisidir. **LuckPerms** entegrasyonu sayesinde, oyuncuların oyun içi yetki grupları (VIP, Rehber, vs.) anında Discord rollerine yansıtılır.
 
 ---
 
@@ -39,8 +39,8 @@
 | :--- | :--- | :--- |
 | `/link` veya `/hesapbagla` | Discord hesabı eşleştirmek için gereken kodu verir. | *Varsayılan* |
 | `/unlink` | Eşleştirilmiş hesabı ayırır. | *Varsayılan* |
-| `/mreload` | Eklenti yapılandırmasını yeniden yükler. | `vxlinker.admin` |
-| `/minfo <oyuncu>` | Oyuncunun bağlı olduğu Discord hesabını gösterir. | `vxlinker.admin` |
+| `/mreload` | Eklenti yapılandırmasını yeniden yükler. | `mlinker.admin` |
+| `/minfo <oyuncu>` | Oyuncunun bağlı olduğu Discord hesabını gösterir. | `mlinker.admin` |
 
 ---
 
