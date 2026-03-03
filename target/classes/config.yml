@@ -66,8 +66,9 @@ discord:
   # Minecraft hesabını başarıyla eşleştirenlere Discord'da verilecek rolün ID'si.
   role-id-verified: "123456789012345678"
 
-  # Botun oynuyor/durum mesajı.
-  status: "Minecraft ↔ Discord | /hesapbagla"
+  # Botun başlangıç durum mesajı (10 saniye sonra otomatik olarak oyuncu sayısı ile güncellenir).
+  # Format: "{online} Oyuncu Çevrimiçi | /hesapesle" şeklinde dinamik güncellenir.
+  status: "mLinker | /hesapesle"
 
   # LuckPerms Grup → Discord Rol Eşleme
   # Hesap eşlendiğinde oyuncunun LuckPerms grubuna göre ek Discord rolleri verilir.

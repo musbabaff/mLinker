@@ -1,6 +1,6 @@
 name: mLinker
 main: com.blockstock.mlinker.MLinker
-version: 0.2.0-BETA
+version: 0.2.1-BETA
 author: musbabaff
 description: >
   Discord ↔ Minecraft account linking, verification and reward system.
