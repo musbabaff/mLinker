@@ -9,6 +9,9 @@ import com.blockstock.mlinker.MLinker;
 import com.blockstock.mlinker.commands.LinkVerifyCommand;
 import com.blockstock.mlinker.utils.MessageUtil;
 
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitTask;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -25,6 +28,7 @@ public class DiscordBot {
 
     private final MLinker plugin;
     private JDA jda;
+    private BukkitTask statusTask;
 
     @SuppressWarnings("null")
     public DiscordBot(MLinker plugin, String token, String status) {
@@ -68,6 +72,9 @@ public class DiscordBot {
             // Oto mesaj gönderimi
             sendAutoMessage();
 
+            // Oyuncu sayısı status güncelleyici
+            startStatusUpdater();
+
         } catch (InterruptedException e) {
             plugin.getLogger().severe("Discord bot başlatılırken kesintiye uğradı: " + e.getMessage());
             Thread.currentThread().interrupt();
@@ -78,6 +85,10 @@ public class DiscordBot {
     }
 
     public void shutdown() {
+        if (statusTask != null) {
+            statusTask.cancel();
+            statusTask = null;
+        }
         if (jda != null) {
             jda.shutdownNow();
             plugin.getLogger().info(MessageUtil.get("discord.bot-stopped"));
@@ -86,6 +97,31 @@ public class DiscordBot {
 
     public JDA getJda() {
         return jda;
+    }
+
+    // ===================================================================
+    // STATUS GÜNCELLEYICI - Oyuncu sayısını Discord bot durumunda gösterir
+    // ===================================================================
+
+    /**
+     * Her 30 saniyede bir Discord bot durumunu günceller.
+     * Format: "X Oyuncu Çevrimiçi | /hesapesle"
+     */
+    private void startStatusUpdater() {
+        if (jda == null)
+            return;
+
+        // Her 30 saniyede bir güncelle (20 tick = 1 saniye, 20*30 = 600 tick)
+        statusTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+            if (jda == null || jda.getStatus() != JDA.Status.CONNECTED)
+                return;
+
+            int onlinePlayers = Bukkit.getOnlinePlayers().size();
+            String statusText = onlinePlayers + " Oyuncu Çevrimiçi | /hesapesle";
+            jda.getPresence().setActivity(Activity.playing(statusText));
+        }, 20L * 10, 20L * 30); // 10 saniye sonra başla, 30 saniyede bir tekrarla
+
+        plugin.getLogger().info("🎮 Bot durumu oyuncu sayısı güncelleyicisi başlatıldı.");
     }
 
     /**

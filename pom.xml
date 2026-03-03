@@ -6,7 +6,7 @@
 
   <groupId>com.blockstock</groupId>
   <artifactId>mLinker</artifactId>
-  <version>0.1.0-BETA</version>
+  <version>0.2.0-BETA</version>
   <name>mLinker</name>
   <description>Discord ↔ Minecraft hesap eşleme sistemi (1.16–1.21.11 uyumlu)</description>
   <url>https://github.com/musbabaff/mLinker</url>
