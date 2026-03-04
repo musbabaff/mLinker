@@ -6,7 +6,7 @@
 
   <groupId>com.blockstock</groupId>
   <artifactId>CordSync</artifactId>
-  <version>1.2.6</version>
+  <version>1.2.7</version>
   <name>CordSync</name>
   <description>Discord ↔ Minecraft account linking, verification and reward system.</description>
   <url>https://github.com/musbabaff/CordSync</url>

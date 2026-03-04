@@ -266,16 +266,29 @@ public class CordSync extends JavaPlugin {
     }
 
     private void initializeDiscordBot(FileConfiguration config) {
-        if (!config.getBoolean("discord.enabled", false)) {
+        String token = config.getString("discord.bot-token");
+        String status = config.getString("discord.status", "Minecraft ↔ Discord Linker");
+
+        boolean hasValidToken = token != null && !token.isEmpty()
+                && !token.equalsIgnoreCase("BOT_TOKEN_BURAYA")
+                && !token.equalsIgnoreCase("BOT_TOKEN_HERE");
+
+        boolean isEnabled = config.getBoolean("discord.enabled", false);
+
+        // Smart Auto-Enabler: If they entered a token but forgot to enable it
+        if (!isEnabled && hasValidToken) {
+            getLogger().info("⚠️ Token detected! Auto-enabling Discord integration in config.yml...");
+            config.set("discord.enabled", true);
+            saveConfig();
+            isEnabled = true;
+        }
+
+        if (!isEnabled) {
             getLogger().info(MessageUtil.get("discord.disabled"));
             return;
         }
 
-        String token = config.getString("discord.bot-token");
-        String status = config.getString("discord.status", "Minecraft â†” Discord Linker");
-
-        if (token == null || token.isEmpty() || token.equalsIgnoreCase("BOT_TOKEN_BURAYA")
-                || token.equalsIgnoreCase("BOT_TOKEN_HERE")) {
+        if (!hasValidToken) {
             getLogger().warning(MessageUtil.get("discord.no-token"));
             return;
         }
