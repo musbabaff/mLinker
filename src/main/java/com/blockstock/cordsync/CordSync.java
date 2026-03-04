@@ -111,13 +111,18 @@ public class CordSync extends JavaPlugin {
         if (config.getBoolean("reverify.enabled", false)) {
             reverifyTask = new ReverifyTask(this);
             reverifyTask.start();
-            getLogger().info("â™» AkÄ±llÄ± Yeniden DoÄŸrulama sistemi etkinleÅŸtirildi.");
+            getLogger().info("Akıllı Yeniden Doğrulama sistemi etkinleştirildi.");
         }
 
         new UpdateChecker(this).checkForUpdates();
 
-        int pluginId = 24656; // bStats Plugin ID
+        int pluginId = 29899; // bStats Plugin ID
         org.bstats.bukkit.Metrics metrics = new org.bstats.bukkit.Metrics(this, pluginId);
+
+        // Custom bStats Chart: Track which storage method servers prefer
+        metrics.addCustomChart(new org.bstats.charts.SimplePie("storage_type", () -> {
+            return getConfig().getString("storage.type", "YAML").toUpperCase();
+        }));
 
         getLogger().info(MessageUtil.get("plugin.enabled"));
     }
