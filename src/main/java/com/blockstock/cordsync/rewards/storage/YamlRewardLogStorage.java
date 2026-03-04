@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.blockstock.cordsync.CordSync;
 
-
 public class YamlRewardLogStorage implements RewardLogStorage {
 
     private final CordSync plugin;
@@ -27,16 +26,15 @@ public class YamlRewardLogStorage implements RewardLogStorage {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
-                plugin.getLogger().info("âœ… reward-logs.yml oluÅŸturuldu.");
+                plugin.getLogger().info("✅ reward-logs.yml created.");
             } catch (IOException e) {
-                plugin.getLogger().severe("âŒ reward-logs.yml oluÅŸturulamadÄ±: " + e.getMessage());
+                plugin.getLogger().severe("❌ Failed to create reward-logs.yml: " + e.getMessage());
             }
         }
 
         this.data = YamlConfiguration.loadConfiguration(file);
     }
 
- 
     @Override
     public void log(UUID player, String rewardType, String details) {
         String uuidStr = player.toString();
@@ -47,15 +45,14 @@ public class YamlRewardLogStorage implements RewardLogStorage {
         data.set(path + ".details", details);
 
         save();
-        plugin.getLogger().info("ğŸ§¾ [" + rewardType + "] Ã¶dÃ¼lÃ¼ loglandÄ±: " + uuidStr);
+        plugin.getLogger().info("🧾 [" + rewardType + "] reward logged: " + uuidStr);
     }
 
-   
     private void save() {
         try {
             data.save(file);
         } catch (IOException e) {
-            plugin.getLogger().severe("âŒ reward-logs.yml kaydedilemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to save reward-logs.yml: " + e.getMessage());
         }
     }
 
@@ -64,5 +61,3 @@ public class YamlRewardLogStorage implements RewardLogStorage {
         save();
     }
 }
-
-

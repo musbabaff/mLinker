@@ -111,7 +111,7 @@ public class CordSync extends JavaPlugin {
         if (config.getBoolean("reverify.enabled", false)) {
             reverifyTask = new ReverifyTask(this);
             reverifyTask.start();
-            getLogger().info("Akıllı Yeniden Doğrulama sistemi etkinleştirildi.");
+            getLogger().info("♻ Smart Re-Verification system enabled.");
         }
 
         new UpdateChecker(this).checkForUpdates();

@@ -35,9 +35,9 @@ public class MySQLStorage implements StorageProvider, Migratable {
             String url = "jdbc:mysql://" + host + ":" + port + "/" + database
                     + "?useSSL=false&autoReconnect=true&characterEncoding=utf8";
             connection = DriverManager.getConnection(url, username, password);
-            plugin.getLogger().info("âœ… MySQL baÄŸlantÄ±sÄ± kuruldu: " + database);
+            plugin.getLogger().info("✅ MySQL connection established: " + database);
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ MySQL baÄŸlantÄ±sÄ± baÅŸarÄ±sÄ±z: " + e.getMessage());
+            plugin.getLogger().severe("❌ MySQL connection failed: " + e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class MySQLStorage implements StorageProvider, Migratable {
                     " first_reward_received TINYINT DEFAULT 0" +
                     ");");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ MySQL tablo oluÅŸturulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to create MySQL tables: " + e.getMessage());
         }
     }
 
@@ -291,5 +291,3 @@ public class MySQLStorage implements StorageProvider, Migratable {
         }
     }
 }
-
-

@@ -26,9 +26,9 @@ public class YamlStorage implements StorageProvider, Migratable {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
-                plugin.getLogger().info("âœ… linked-accounts.yml oluÅŸturuldu.");
+                plugin.getLogger().info("✅ linked-accounts.yml created.");
             } catch (IOException e) {
-                plugin.getLogger().severe("âŒ linked-accounts.yml oluÅŸturulamadÄ±: " + e.getMessage());
+                plugin.getLogger().severe("❌ Failed to create linked-accounts.yml: " + e.getMessage());
             }
         }
 
@@ -133,7 +133,7 @@ public class YamlStorage implements StorageProvider, Migratable {
         try {
             data.save(file);
         } catch (IOException e) {
-            plugin.getLogger().severe("âŒ linked-accounts.yml kaydedilemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to save linked-accounts.yml: " + e.getMessage());
         }
     }
 
@@ -177,5 +177,3 @@ public class YamlStorage implements StorageProvider, Migratable {
         save();
     }
 }
-
-

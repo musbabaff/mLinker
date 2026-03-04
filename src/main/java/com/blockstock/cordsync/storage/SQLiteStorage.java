@@ -32,9 +32,9 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (!dbFile.getParentFile().exists())
                 dbFile.getParentFile().mkdirs();
             connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-            plugin.getLogger().info("âœ… SQLite baÄŸlantÄ±sÄ± kuruldu: " + dbFile.getName());
+            plugin.getLogger().info("✅ SQLite connection established: " + dbFile.getName());
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ SQLite baÄŸlantÄ±sÄ± kurulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to establish SQLite connection: " + e.getMessage());
         }
     }
 
@@ -194,10 +194,10 @@ public class SQLiteStorage implements StorageProvider, Migratable {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                plugin.getLogger().info("ğŸ’¾ SQLite baÄŸlantÄ±sÄ± kapatÄ±ldÄ±.");
+                plugin.getLogger().info("💾 SQLite connection closed.");
             }
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ SQLite baÄŸlantÄ±sÄ± kapatÄ±lamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to close SQLite connection: " + e.getMessage());
         }
     }
 
@@ -285,5 +285,3 @@ public class SQLiteStorage implements StorageProvider, Migratable {
         }
     }
 }
-
-

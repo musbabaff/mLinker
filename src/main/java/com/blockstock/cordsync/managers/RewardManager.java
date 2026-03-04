@@ -66,7 +66,7 @@ public class RewardManager {
                 dataFile.getParentFile().mkdirs();
                 dataFile.createNewFile();
             } catch (IOException e) {
-                plugin.getLogger().severe("âŒ reward-data.yml oluÅŸturulamadÄ±: " + e.getMessage());
+                plugin.getLogger().severe("❌ Failed to create reward-data.yml: " + e.getMessage());
             }
         }
         this.data = YamlConfiguration.loadConfiguration(dataFile);
@@ -94,7 +94,7 @@ public class RewardManager {
         intervalItemsRaw = readItemsList(cfg, baseInt + ".items");
 
         plugin.getLogger().info(
-                "ğŸ Rewards yÃ¼klendi: first=" + firstEnabled + ", interval=" + intervalEnabled + " (" + every + ")");
+                "🎁 Rewards loaded: first=" + firstEnabled + ", interval=" + intervalEnabled + " (" + every + ")");
     }
 
     public void start() {
@@ -104,7 +104,7 @@ public class RewardManager {
         }
 
         if (!intervalEnabled) {
-            plugin.getLogger().info("â¸ Periyodik Ã¶dÃ¼ller devre dÄ±ÅŸÄ±.");
+            plugin.getLogger().info("⏸ Periodic rewards are disabled.");
             return;
         }
 
@@ -114,7 +114,7 @@ public class RewardManager {
                 tryGrantInterval(p, now);
             }
         }, 20L * 30, 20L * 60);
-        plugin.getLogger().info("â± Periyodik Ã¶dÃ¼l denetleyici baÅŸlatÄ±ldÄ±.");
+        plugin.getLogger().info("⏳ Periodic reward checker started.");
     }
 
     public void stop() {
@@ -215,7 +215,8 @@ public class RewardManager {
     }
 
     /**
-     * Config'den okunan eÅŸya listesini oyuncuya verir (dÄ±ÅŸarÄ±dan eriÅŸilebilir).
+     * Config'den okunan eÅŸya listesini oyuncuya verir (dÄ±ÅŸarÄ±dan
+     * eriÅŸilebilir).
      */
     public int giveItemsFromConfig(Player player, java.util.List<?> items) {
         if (items == null || items.isEmpty())
@@ -258,12 +259,12 @@ public class RewardManager {
 
             Material mat = Material.matchMaterial(matName);
             if (mat == null) {
-                plugin.getLogger().warning("GeÃ§ersiz materyal: " + matName);
+                plugin.getLogger().warning("Invalid material: " + matName);
                 return null;
             }
             return new ItemStack(mat, amount);
         } catch (Exception e) {
-            plugin.getLogger().warning("Item parse hatasÄ± (simple): " + def + " -> " + e.getMessage());
+            plugin.getLogger().warning("Item parse error (simple): " + def + " -> " + e.getMessage());
             return null;
         }
     }
@@ -274,7 +275,7 @@ public class RewardManager {
             int amount = Integer.parseInt(String.valueOf(map.getOrDefault("amount", "1")));
             Material mat = Material.matchMaterial(matName);
             if (mat == null) {
-                plugin.getLogger().warning("GeÃ§ersiz materyal: " + matName);
+                plugin.getLogger().warning("Invalid material: " + matName);
                 return null;
             }
             ItemStack stack = new ItemStack(mat, Math.max(1, amount));
@@ -341,7 +342,7 @@ public class RewardManager {
             return stack;
 
         } catch (Exception e) {
-            plugin.getLogger().warning("Item parse hatasÄ± (advanced): " + e.getMessage());
+            plugin.getLogger().warning("Item parse error (advanced): " + e.getMessage());
             return null;
         }
     }
@@ -395,7 +396,7 @@ public class RewardManager {
                 return TimeUnit.MINUTES.toMillis(Math.max(1, v));
             }
         } catch (NumberFormatException e) {
-            plugin.getLogger().warning("GeÃ§ersiz sÃ¼re formatÄ±: " + s + " (varsayÄ±lan 1d)");
+            plugin.getLogger().warning("Invalid duration format: " + s + " (default 1d)");
             return TimeUnit.DAYS.toMillis(1);
         }
     }
@@ -410,7 +411,7 @@ public class RewardManager {
         try {
             data.save(dataFile);
         } catch (IOException e) {
-            plugin.getLogger().severe("âŒ reward-data.yml kaydedilemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to save reward-data.yml: " + e.getMessage());
         }
     }
 
@@ -425,5 +426,3 @@ public class RewardManager {
         return (t <= 0) ? Optional.empty() : Optional.of(Instant.ofEpochMilli(t));
     }
 }
-
-

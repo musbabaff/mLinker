@@ -12,8 +12,6 @@ import java.util.UUID;
 
 import com.blockstock.cordsync.CordSync;
 
-
-
 public class SQLiteRewardLogStorage implements RewardLogStorage {
 
     private final CordSync plugin;
@@ -26,37 +24,35 @@ public class SQLiteRewardLogStorage implements RewardLogStorage {
         createTable();
     }
 
-
     private void connect() {
         try {
             File dbFile = new File(plugin.getDataFolder(), "reward-logs.db");
-            if (!dbFile.getParentFile().exists()) dbFile.getParentFile().mkdirs();
+            if (!dbFile.getParentFile().exists())
+                dbFile.getParentFile().mkdirs();
 
             connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-            plugin.getLogger().info("âœ… SQLite Ã¶dÃ¼l log baÄŸlantÄ±sÄ± kuruldu.");
+            plugin.getLogger().info("✅ SQLite reward log connection established.");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ SQLite baÄŸlantÄ±sÄ± kurulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to establish SQLite reward log connection: " + e.getMessage());
         }
     }
 
- 
     private void createTable() {
         String sql = """
-            CREATE TABLE IF NOT EXISTS reward_logs (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                player_uuid TEXT NOT NULL,
-                timestamp TEXT NOT NULL,
-                reward_type TEXT NOT NULL,
-                details TEXT
-            );
-        """;
+                    CREATE TABLE IF NOT EXISTS reward_logs (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        player_uuid TEXT NOT NULL,
+                        timestamp TEXT NOT NULL,
+                        reward_type TEXT NOT NULL,
+                        details TEXT
+                    );
+                """;
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ reward_logs tablosu oluÅŸturulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to create reward_logs table: " + e.getMessage());
         }
     }
-
 
     @Override
     public void log(UUID player, String rewardType, String details) {
@@ -68,9 +64,9 @@ public class SQLiteRewardLogStorage implements RewardLogStorage {
             ps.setString(4, details);
             ps.executeUpdate();
 
-            plugin.getLogger().info("ğŸ§¾ [" + rewardType + "] Ã¶dÃ¼lÃ¼ SQLite loglandÄ±: " + player);
+            plugin.getLogger().info("🧾 [" + rewardType + "] reward logged to SQLite: " + player);
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Ã–dÃ¼l logu SQLiteâ€™a kaydedilemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to log reward to SQLite: " + e.getMessage());
         }
     }
 
@@ -78,12 +74,10 @@ public class SQLiteRewardLogStorage implements RewardLogStorage {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                plugin.getLogger().info("ğŸ’¾ SQLite Ã¶dÃ¼l log baÄŸlantÄ±sÄ± kapatÄ±ldÄ±.");
+                plugin.getLogger().info("💾 SQLite reward log connection closed.");
             }
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ SQLite baÄŸlantÄ±sÄ± kapatÄ±lamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ Failed to close SQLite connection: " + e.getMessage());
         }
     }
 }
-
-
