@@ -1,16 +1,16 @@
 # ╔══════════════════════════════════════════════════════════════════════╗
-# ║                                                                    ║
-# ║    ██████╗ ██████╗ ██████╗ ██████╗ ███████╗██╗   ██╗███╗   ██╗     ║
-# ║   ██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝╚██╗ ██╔╝████╗  ██║    ║
-# ║   ██║     ██║   ██║██████╔╝██║  ██║███████╗ ╚████╔╝ ██╔██╗ ██║    ║
-# ║   ██║     ██║   ██║██╔══██╗██║  ██║╚════██║  ╚██╔╝  ██║╚██╗██║    ║
-# ║   ╚██████╗╚██████╔╝██║  ██║██████╔╝███████║   ██║   ██║ ╚████║    ║
-# ║    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═══╝   ║
-# ║                                                                    ║
-# ║        Advanced Discord ↔ Minecraft Account Linking System         ║
-# ║                    Developer: musbabaff                            ║
-# ║             https://github.com/musbabaff/CordSync                 ║
-# ║                                                                    ║
+# ║                                                                      ║
+# ║    ██████╗ ██████╗ ██████╗ ██████╗ ███████╗██╗   ██╗███╗   ██╗       ║
+# ║   ██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝╚██╗ ██╔╝████╗  ██║       ║
+# ║   ██║     ██║   ██║██████╔╝██║  ██║███████╗ ╚████╔╝ ██╔██╗ ██║       ║
+# ║   ██║     ██║   ██║██╔══██╗██║  ██║╚════██║  ╚██╔╝  ██║╚██╗██║       ║
+# ║   ╚██████╗╚██████╔╝██║  ██║██████╔╝███████║   ██║   ██║ ╚████║       ║
+# ║    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═══╝       ║
+# ║                                                                      ║
+# ║        Advanced Discord ↔ Minecraft Account Linking System           ║
+# ║                    Developer: musbabaff                              ║
+# ║             https://github.com/musbabaff/CordSync                    ║
+# ║                                                                      ║
 # ╚══════════════════════════════════════════════════════════════════════╝
 #
 # Config version — DO NOT CHANGE
@@ -30,19 +30,19 @@ update-checker: true
 metrics: true
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  LANGUAGE & LOCALIZATION                                            │
+# │  LANGUAGE & LOCALIZATION                                             │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Supported: en, tr, de, es, fr                                     │
-# │  Custom languages: Create locales/xx.yml in plugin folder           │
-# │  Missing keys automatically fall back to English                    │
+# │  Supported: en, tr, de, es, fr                                       │
+# │  Custom languages: Create locales/xx.yml in plugin folder            │
+# │  Missing keys automatically fall back to English                     │
 # └──────────────────────────────────────────────────────────────────────┘
 language: en
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  SMART RE-VERIFICATION                                              │
+# │  SMART RE-VERIFICATION                                               │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Periodically checks if linked players are still in Discord         │
-# │  Prevents "join-quit-farm" abuse                                    │
+# │  Periodically checks if linked players are still in Discord          │
+# │  Prevents "join-quit-farm" abuse                                     │
 # └──────────────────────────────────────────────────────────────────────┘
 reverify:
   enabled: true
@@ -52,9 +52,9 @@ reverify:
   log-channel-id: ""
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  LINK SETTINGS                                                      │
+# │  LINK SETTINGS                                                       │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Configure code generation and expiration                           │
+# │  Configure code generation and expiration                            │
 # └──────────────────────────────────────────────────────────────────────┘
 link:
   expire-seconds: 300
@@ -62,10 +62,10 @@ link:
   max-active-codes: 1
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  DISCORD BOT                                                        │
+# │  DISCORD BOT                                                         │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Main Discord integration settings                                  │
-# │  Required: bot-token, guild-id                                      │
+# │  Main Discord integration settings                                   │
+# │  Required: bot-token, guild-id                                       │
 # └──────────────────────────────────────────────────────────────────────┘
 discord:
   enabled: true
@@ -73,7 +73,7 @@ discord:
   guild-id: ""
   role-id-verified: ""
 
-  # ── Rotating Bot Status ──────────────────────────────────────────────
+  # ── Rotating Bot Status ────────────────────────────────────────────── 
   # Variables: {online}, {max}, {linked}
   # Types: PLAYING, WATCHING, LISTENING
   status:
@@ -128,9 +128,9 @@ discord:
     reset-on-unlink: true
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  SECURITY & ANTI-ABUSE                                              │
+# │  SECURITY & ANTI-ABUSE                                               │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Comprehensive protection against link abuse and farming            │
+# │  Comprehensive protection against link abuse and farming             │
 # └──────────────────────────────────────────────────────────────────────┘
 security:
   # Cooldown after unlinking before re-linking
@@ -152,7 +152,7 @@ security:
     censor-ip: true
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  CHAT BRIDGE (MC ↔ Discord)                                        │
+# │  CHAT BRIDGE (MC ↔ Discord)                                          │
 # ├──────────────────────────────────────────────────────────────────────┤
 # │  Bidirectional chat relay between Minecraft and Discord              │
 # └──────────────────────────────────────────────────────────────────────┘
@@ -173,7 +173,7 @@ chat-bridge:
     - "."
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  CONFIGURABLE COMMANDS                                              │
+# │  CONFIGURABLE COMMANDS                                               │
 # ├──────────────────────────────────────────────────────────────────────┤
 # │  Customize Discord slash command name                                │
 # └──────────────────────────────────────────────────────────────────────┘
@@ -182,9 +182,9 @@ commands:
   discord-slash-description: "Link your Minecraft account with Discord."
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  STORAGE                                                            │
+# │  STORAGE                                                             │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Backends: SQLITE (default), MYSQL, YAML                            │
+# │  Backends: SQLITE (default), MYSQL, YAML                             │
 # └──────────────────────────────────────────────────────────────────────┘
 storage:
   type: "SQLITE"
@@ -197,9 +197,9 @@ storage:
   last-storage: "SQLITE"
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  REWARDS                                                            │
+# │  REWARDS                                                             │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Configurable reward system for linking, intervals, and boosters    │
+# │  Configurable reward system for linking, intervals, and boosters     │
 # └──────────────────────────────────────────────────────────────────────┘
 rewards:
   # ── First Link Reward ───────────────────────────────────────────────
@@ -233,7 +233,7 @@ rewards:
       - "NETHERITE_INGOT:1"
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  REWARD LOGS                                                        │
+# │  REWARD LOGS                                                         │
 # └──────────────────────────────────────────────────────────────────────┘
 reward-logs:
   enabled: true
@@ -241,9 +241,9 @@ reward-logs:
   mysql-table: "cordsync_reward_logs"
 
 # ┌──────────────────────────────────────────────────────────────────────┐
-# │  COMPATIBILITY                                                      │
+# │  COMPATIBILITY                                                       │
 # ├──────────────────────────────────────────────────────────────────────┤
-# │  Multi-version, Folia, and Proxy support settings                   │
+# │  Multi-version, Folia, and Proxy support settings                    │
 # └──────────────────────────────────────────────────────────────────────┘
 compatibility:
   # Folia support — uses regionalized scheduling when available

@@ -266,6 +266,21 @@ public class CordSync extends JavaPlugin {
     }
 
     private void initializeDiscordBot(FileConfiguration config) {
+        // Anti-Format-Breaking Check: Did the user strip the indentation spaces?
+        if (!config.contains("discord.bot-token") && config.contains("bot-token")) {
+            getLogger().severe("──────────────────────────────────────────────────");
+            getLogger().severe("🚨 CRITICAL YAZILIM/BİÇİM HATASI (YAML FORMAT ERROR) 🚨");
+            getLogger().severe("🚨 'bot-token' ve 'enabled' ayarlarının başındaki BOŞLUKLARI silmişsiniz!");
+            getLogger().severe("🚨 Bu ayarların discord'un 'içinde' sayılması için başlarında 2 adet boşluk olmalı.");
+            getLogger().severe("🚨 Lütfen config.yml dosyanızı şu şekilde DÜZELTİN:");
+            getLogger().severe("discord:");
+            getLogger().severe("  enabled: true");
+            getLogger().severe("  bot-token: \"SİZİN_TOKENİNİZ\"");
+            getLogger().severe("🚨 Boşlukları (SPACE tuşu ile) ekleyip kaydedin ve /csreload yazın.");
+            getLogger().severe("──────────────────────────────────────────────────");
+            return;
+        }
+
         String token = config.getString("discord.bot-token");
         String status = config.getString("discord.status", "Minecraft ↔ Discord Linker");
 
