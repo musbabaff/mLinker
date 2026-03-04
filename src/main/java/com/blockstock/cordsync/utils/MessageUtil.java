@@ -18,13 +18,11 @@ public class MessageUtil {
     private static final Map<String, String> cache = new HashMap<>();
     private static FileConfiguration messages;
     private static FileConfiguration fallback;
-    private static String activeLanguage = "en";
 
     private static final String[] SUPPORTED_LANGUAGES = { "en", "tr", "de", "es", "fr" };
 
     public static void load(CordSync plugin) {
         String lang = plugin.getConfig().getString("language", "en").toLowerCase();
-        activeLanguage = lang;
 
         // Save all default locale files
         for (String supported : SUPPORTED_LANGUAGES) {
@@ -133,5 +131,7 @@ public class MessageUtil {
         return msg;
     }
 
-    public static void reload(CordSync plugin) { load(plugin); }
+    public static void reload(CordSync plugin) {
+        load(plugin);
+    }
 }

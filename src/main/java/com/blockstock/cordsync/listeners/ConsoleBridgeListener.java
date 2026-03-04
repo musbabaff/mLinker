@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.time.Instant;
 import java.util.concurrent.LinkedBlockingQueue;
 
+@SuppressWarnings("null")
 public class ConsoleBridgeListener extends ListenerAdapter {
 
     private final CordSync plugin;

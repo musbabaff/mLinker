@@ -21,6 +21,7 @@ import net.dv8tion.jda.api.entities.Member;
 import java.awt.Color;
 import java.time.Instant;
 
+@SuppressWarnings("null")
 public class JoinQuitListener implements Listener {
 
     private final CordSync plugin;

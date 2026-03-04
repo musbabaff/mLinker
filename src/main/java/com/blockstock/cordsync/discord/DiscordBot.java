@@ -2,7 +2,7 @@ package com.blockstock.cordsync.discord;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Map;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.blockstock.cordsync.CordSync;
@@ -148,7 +148,8 @@ public class DiscordBot extends ListenerAdapter {
         // Format and send to MC
         String format = plugin.getConfig().getString("chat-bridge.minecraft-format",
                 "&7[&bDiscord&7] &f{player}&7: &f{message}");
-        String playerName = event.getMember() != null ? event.getMember().getEffectiveName()
+        net.dv8tion.jda.api.entities.Member member = event.getMember();
+        String playerName = member != null ? member.getEffectiveName()
                 : event.getAuthor().getName();
         String formatted = ChatColor.translateAlternateColorCodes('&',
                 format.replace("{player}", playerName).replace("{message}", rawMessage));
@@ -165,7 +166,7 @@ public class DiscordBot extends ListenerAdapter {
      * Called by ChatBridgeListener to send MC messages to Discord.
      */
     public void sendChatBridgeMessage(String message) {
-        if (jda == null)
+        if (jda == null || message == null)
             return;
         String channelId = plugin.getConfig().getString("chat-bridge.channel-id", "");
         if (channelId == null || channelId.isEmpty())
@@ -218,6 +219,9 @@ public class DiscordBot extends ListenerAdapter {
             text = text.replace("{online}", String.valueOf(online))
                     .replace("{max}", String.valueOf(max))
                     .replace("{linked}", String.valueOf(linked));
+
+            if (text == null)
+                text = "";
 
             Activity activity;
             switch (type) {

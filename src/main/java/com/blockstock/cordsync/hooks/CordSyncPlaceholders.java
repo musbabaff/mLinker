@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.entities.User;
  * %cordsync_linked_count% → Total linked accounts
  * %cordsync_online_linked% → Online linked players count
  */
+@SuppressWarnings("null")
 public class CordSyncPlaceholders extends PlaceholderExpansion {
 
     private final CordSync plugin;

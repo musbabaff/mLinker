@@ -1,6 +1,5 @@
 package com.blockstock.cordsync.listeners;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -8,8 +7,6 @@ import org.bukkit.Bukkit;
 import com.blockstock.cordsync.CordSync;
 import com.blockstock.cordsync.storage.StorageProvider;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;

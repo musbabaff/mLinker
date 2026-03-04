@@ -37,6 +37,7 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 
+@SuppressWarnings("null")
 public class LinkVerifyCommand extends ListenerAdapter {
 
     private final CordSync plugin;
@@ -228,7 +229,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
                 .setDescription(MessageUtil.format("discord.confirm-desc", Map.of("player", playerName)))
                 .setColor(new Color(255, 165, 0))
                 .addField("\uD83C\uDFAE Minecraft", playerName, true)
-                .addField("\uD83D\uDCAC Discord", event.getUser().getAsTag(), true)
+                .addField("\uD83D\uDCAC Discord", event.getUser().getName(), true)
                 .setFooter("CordSync \u2022 2FA Verification")
                 .setTimestamp(java.time.Instant.now());
 
@@ -273,7 +274,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
                 .setTitle("\uD83D\uDCCA Account Status")
                 .setDescription("\u2705 Your account is **linked**!")
                 .addField("\uD83C\uDFAE Minecraft", playerName != null ? playerName : "Unknown", true)
-                .addField("\uD83D\uDCAC Discord", event.getUser().getAsTag(), true)
+                .addField("\uD83D\uDCAC Discord", event.getUser().getName(), true)
                 .addField("\uD83D\uDD04 Relink Count", String.valueOf(relinkCount), true)
                 .addField("\uD83D\uDE80 Booster", isBoosting ? "\u2705 Yes" : "\u274C No", true)
                 .addField("Status", "\uD83D\uDFE2 Linked", true)
@@ -324,7 +325,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
                 .setDescription(MessageUtil.format("discord.success-desc", Map.of("player", pending.playerName)))
                 .setColor(new Color(0, 200, 83))
                 .addField("\uD83C\uDFAE Minecraft", pending.playerName, true)
-                .addField("\uD83D\uDCAC Discord", event.getUser().getAsTag(), true)
+                .addField("\uD83D\uDCAC Discord", event.getUser().getName(), true)
                 .setFooter("CordSync \u2022 Account Linked \u2705")
                 .setTimestamp(java.time.Instant.now());
         event.replyEmbeds(embed.build()).setEphemeral(true).queue();

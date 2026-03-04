@@ -1,11 +1,8 @@
 package com.blockstock.cordsync.listeners;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -33,6 +30,7 @@ import java.time.Instant;
  * 2FA Login System: IP verification + Discord approval on server join.
  * When a linked player joins from an unknown IP, they must approve via Discord.
  */
+@SuppressWarnings("null")
 public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
     private final CordSync plugin;
@@ -76,7 +74,7 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
         }
 
         // Send Discord 2FA request
-        pendingLogins.put(uuid, new PendingLogin(uuid, player.getName(), discordId, currentIp));
+        pendingLogins.put(uuid, new PendingLogin(player.getName(), discordId, currentIp));
         sendDiscordApproval(uuid, player.getName(), discordId, currentIp);
 
         // Kick with message — player must approve via Discord first
@@ -296,13 +294,11 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
     // ===================================================================
 
     private static class PendingLogin {
-        final UUID uuid;
         final String playerName;
         final String discordId;
         final String ipAddress;
 
-        PendingLogin(UUID uuid, String playerName, String discordId, String ipAddress) {
-            this.uuid = uuid;
+        PendingLogin(String playerName, String discordId, String ipAddress) {
             this.playerName = playerName;
             this.discordId = discordId;
             this.ipAddress = ipAddress;
