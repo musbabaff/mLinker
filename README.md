@@ -73,7 +73,7 @@
 ## 📦 Installation
 
 1. Download the latest release from [Releases](https://github.com/musbabaff/CordSync/releases)
-2. Place `CordSync-x.x.x.jar` in your server's `plugins/` folder
+2. Place `CordSync-1.2.0.jar` in your server's `plugins/` folder
 3. Restart the server
 4. Edit `plugins/CordSync/config.yml` with your Discord bot token
 5. Reload with `/csreload`
