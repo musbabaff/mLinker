@@ -18,50 +18,46 @@
 
 </div>
 
-## 🌟 Features
+## 🌟 Premium Features
 
-### 🔗 Smart Account Linking
-- **Modal-Based Linking** — Users click a button → fill a form → confirm with 2FA
-- **No slash commands needed** — Clean, button-driven experience
-- **2FA Login Protection** — IP verification + Discord approval on server join
-- **Anti-Abuse System** — Cooldowns, relink limits, and one-time rewards
+### 📸 Webhook Chat Bridge
+- **Minecraft Skins in Discord** — Messages from MC use the player's 3D head as their Discord avatar!
+- **Immersive Experience** — Feels like a native Discord integration
+- **Message Sanitization** — Prevents ping exploits
 
-### 💬 Chat Bridge
-- **Bidirectional messaging** — MC ↔ Discord chat sync
-- **Configurable access** — ALL users or LINKED_ONLY
-- **Message sanitization** — Prevents @everyone/@here exploits
+### 🖥️ Secure Console Bridge
+- **Two-way Console** — View live server logs and send commands directly from a protected Discord channel
+- **Role-Based Security** — Only authorized Discord admins can access the bridge
+- **Command Blacklist** — Prevent dangerous commands (`/stop`, `/op`) from being run via Discord
 
-### 🎮 Discord Integration
-- **Rotating bot status** — Dynamic status with player count, linked accounts
-- **Premium embeds** — Rich, styled log messages for all events
-- **Role sync** — LuckPerms group → Discord role mapping
-- **Nickname sync** — Automatically update Discord nicknames
-- **Booster rewards** — Special rewards for server boosters
+### 🎒 Interactive In-Game GUI
+- **Chest Menu Integration** — A beautiful, fully localized `/link` chest interface
+- **No More Complex Commands** — Players link their accounts with intuitive button clicks
 
-### 🛡️ Security
-- **2FA Login System** — Verify via Discord before entering the server
-- **IP verification** — Detect unknown IPs and require Discord confirmation
-- **Unlink cooldown** — Prevent reward farming
-- **Relink limits** — Maximum re-linking attempts
-- **First reward protection** — One-time only first-link rewards
+### 📦 PlaceholderAPI Support
+- **Dynamic Placeholders** — Display linking status seamlessly in Tablists, Scoreboards, and Chat
+- **Available Tags** — `%cordsync_is_linked%`, `%cordsync_discord_name%`, `%cordsync_discord_role%`, and 5 more!
 
-### 🎁 Reward System
-- **First-link rewards** — Commands + items on first link
-- **Periodic rewards** — Daily/hourly rewards for linked players
-- **Booster rewards** — Extra rewards for Discord boosters
-- **Reward logging** — Full audit trail
+### 🔔 Rich Join/Quit Embeds
+- **Visual Tracking** — Automatically broadcast beautiful embeds to Discord when a player joins or leaves
+- **Player Avatars** — Includes the player's 3D Minecraft face alongside their mapped Discord tag
 
-### 🌍 Multi-Language Support
-- **5 built-in languages** — English, Turkish, German, Spanish, French
-- **Custom translations** — Create your own `locales/xx.yml`
-- **English fallback** — Missing keys automatically fall back to English
+### 🔄 Reverse Sync (LuckPerms)
+- **Discord → Minecraft** — Automatically give LuckPerms groups when a player gets a Discord role
+- **Supporter Perks** — Instantly grant in-game ranks to your Discord Boosters and Patreons
+
+### 🛡️ 2FA Login Protection
+- **IP Verification** — Detects unknown IPs on join and securely requests Discord confirmation
+- **Anti-Grief Shield** — If an account is compromised, the attacker cannot log in without Discord approval!
+
+### 🌍 100% Configurable & Localized
+- **5 Built-In Languages** — English, Turkish, German, Spanish, French included out of the box
+- **Fully Customizable** — Every single string, GUI title, and item lore is dynamically configurable
 
 ### ⚡ Performance & Compatibility
-- **Folia support** — Compatible with Folia's regionalized threading
-- **Multi-version** — Works on Minecraft 1.8 through 1.21+
-- **Proxy support** — BungeeCord & Velocity compatible
-- **Multiple storage backends** — SQLite, MySQL, YAML
-- **Async operations** — No server lag from database/Discord calls
+- **Folia Support** — Fully compatible with Folia's regionalized threading via native async scaling
+- **Multi-Version** — Works flawlessly on Minecraft 1.8 through 1.21.4+
+- **Proxy Ready** — BungeeCord & Velocity compatible
 
 ### 🔧 Developer-Friendly
 - **Config auto-migration** — Updates configs without losing your settings
