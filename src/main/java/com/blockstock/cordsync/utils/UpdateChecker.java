@@ -25,6 +25,7 @@ public class UpdateChecker {
 
     public void checkForUpdates() {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            plugin.debug("UpdateChecker: Fetching latest release from GitHub...");
             try {
                 String apiUrl = String.format(githubAPI, repoOwner, repoName);
                 HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();

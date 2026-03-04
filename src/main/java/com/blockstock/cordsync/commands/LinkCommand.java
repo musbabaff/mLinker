@@ -73,11 +73,12 @@ public class LinkCommand implements CommandExecutor {
         }
 
         // TÄ±klanabilir ÅŸÄ±k metin tasarÄ±mÄ±
-        TextComponent clickableCode = new TextComponent("ã€Œ " + code + " ã€");
+        TextComponent clickableCode = new TextComponent("✦ " + code + " ✦");
         clickableCode.setColor(ChatColor.AQUA);
         clickableCode.setBold(true);
 
-        // Ã–NEMLÄ° DEÄÄ°ÅÄ°KLÄ°K: 1.15+ iÃ§in COPY_TO_CLIPBOARD kullanarak oyuncunun kod
+        // Ã–NEMLÄ° DEÄÄ°ÅÄ°KLÄ°K: 1.15+ iÃ§in COPY_TO_CLIPBOARD kullanarak oyuncunun
+        // kod
         // kopyalamasÄ±nÄ± kolaylaÅŸtÄ±rdÄ±k.
         clickableCode.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, code));
 
@@ -93,4 +94,3 @@ public class LinkCommand implements CommandExecutor {
         player.sendMessage("");
     }
 }
-

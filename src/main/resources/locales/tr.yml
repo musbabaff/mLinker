@@ -19,6 +19,11 @@ decorations:
 
 link:
   usage: "&8[&b&l⚡&8] &fEşleme kodu oluşturmak için &b/hesapesle &fyazın."
+  header: "&8&m                                                    "
+  title: "&b&l⚡ Bağlantı Kodu!"
+  code-new: "&7Lütfen &bDiscord&7 sunucumuza gidin, &f/link &7yazın ve aşağıdaki kodu girin:"
+  code-active: "&7Şu anda kullanımda olan aktif bir kodunuz var:"
+  copied-hover: "&aKopyalamak için tıkla!"
   code-generated: "&8[&a&l✓&8] &fEşleme kodunuz: &b&l{code} &7(&f{time}sn &7içinde süresi dolacak)"
   code-already: "&8[&e&l⚠&8] &fZaten aktif bir kodunuz var: &b&l{code}"
   success: "&8[&a&l✓&8] &a&lBaşarılı! &fHesabınız başarıyla eşlendi! &7🎉"

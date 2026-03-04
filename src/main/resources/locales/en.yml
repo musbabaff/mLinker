@@ -19,6 +19,11 @@ decorations:
 
 link:
   usage: "&8[&b&l⚡&8] &fUse &b/link &fto generate a linking code."
+  header: "&8&m                                                    "
+  title: "&b&l⚡ Linking Code!"
+  code-new: "&7Please go to our &bDiscord&7 server, type &f/link&7, and enter the code below:"
+  code-active: "&7You already have an active code. Enter the code below in Discord:"
+  copied-hover: "&aClick to copy!"
   code-generated: "&8[&a&l✓&8] &fYour linking code: &b&l{code} &7(Expires in &f{time}s&7)"
   code-already: "&8[&e&l⚠&8] &fYou already have an active code: &b&l{code}"
   success: "&8[&a&l✓&8] &a&lSuccess! &fYour account has been linked! &7🎉"

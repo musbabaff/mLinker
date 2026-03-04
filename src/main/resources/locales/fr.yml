@@ -18,6 +18,11 @@ decorations:
 
 link:
   usage: "&8[&b&l⚡&8] &fUtilisez &b/link &fpour générer un code."
+  header: "&8&m                                                    "
+  title: "&b&l⚡ Code de Liaison!"
+  code-new: "&7Veuillez aller sur notre serveur &bDiscord&7, taper &f/link&7 et entrer le code ci-dessous:"
+  code-active: "&7Vous avez déjà un code actif. Entrez ce code sur Discord:"
+  copied-hover: "&aCliquez pour copier!"
   code-generated: "&8[&a&l✓&8] &fVotre code : &b&l{code} &7(Valide pendant &f{time}s&7)"
   code-already: "&8[&e&l⚠&8] &fVous avez déjà un code actif : &b&l{code}"
   success: "&8[&a&l✓&8] &a&lSuccès ! &fVotre compte a été lié ! &7🎉"

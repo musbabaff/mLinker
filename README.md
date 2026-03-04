@@ -70,10 +70,10 @@
 
 1. Download the latest release from [Releases](https://github.com/musbabaff/CordSync/releases)
 2. Compile the plugin using `mvn clean package`.
-3. Locate `CordSync-1.3.3.jar` in the `target/` directory.
+3. Locate `CordSync-1.3.4.jar` in the `target/` directory.
 
 ### Quick Add
-1. Place `CordSync-1.3.3.jar` in your server's `plugins/` folder
+1. Place `CordSync-1.3.4.jar` in your server's `plugins/` folder
 2. Restart the server
 3. Edit `plugins/CordSync/config.yml` with your Discord bot token
 4. Reload with `/csreload`

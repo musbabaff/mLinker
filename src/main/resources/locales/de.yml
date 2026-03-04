@@ -17,7 +17,12 @@ decorations:
   header: "\n&b&l⚡ CordSync &8— &7Kontoverknüpfung\n&8&m                                                    "
 
 link:
-  usage: "&8[&b&l⚡&8] &fVerwende &b/link &fum einen Verknüpfungscode zu erstellen."
+  usage: "&8[&b&l⚡&8] &fNutze &b/link &fum einen Verknüpfungscode zu generieren."
+  header: "&8&m                                                    "
+  title: "&b&l⚡ Verknüpfungscode!"
+  code-new: "&7Bitte gehe auf unseren &bDiscord&7 Server, tippe &f/link&7 und gib den folgenden Code ein:"
+  code-active: "&7Du hast bereits einen aktiven Code. Gib diesen Code auf Discord ein:"
+  copied-hover: "&aKlicken zum Kopieren!"
   code-generated: "&8[&a&l✓&8] &fDein Code: &b&l{code} &7(Gültig für &f{time}s&7)"
   code-already: "&8[&e&l⚠&8] &fDu hast bereits einen aktiven Code: &b&l{code}"
   success: "&8[&a&l✓&8] &a&lErfolgreich! &fDein Konto wurde verknüpft! &7🎉"

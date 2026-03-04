@@ -64,6 +64,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.setString(2, playerName);
             ps.setString(3, discordId);
             ps.executeUpdate();
+            plugin.debug("SQLite: Successfully inserted/updated linked profile for UUID " + uuid.toString());
         } catch (SQLException e) {
             plugin.getLogger().severe("âŒ Hesap kaydÄ± oluÅŸturulamadÄ±: " + e.getMessage());
         }

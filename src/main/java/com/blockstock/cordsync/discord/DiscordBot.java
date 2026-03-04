@@ -339,6 +339,7 @@ public class DiscordBot extends ListenerAdapter {
         if (channelId == null || channelId.isEmpty())
             return;
 
+        plugin.debug("Discord: Attempting to process Auto-Message in channel " + channelId);
         try {
             TextChannel channel = jda.getTextChannelById(channelId);
             if (channel == null)
