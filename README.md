@@ -4,7 +4,7 @@
 
 ### Advanced Discord ↔ Minecraft Account Linking System
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/musbabaff/CordSync/releases)
+[![Version](https://img.shields.io/github/v/release/musbabaff/CordSync?color=blue&label=version)](https://github.com/musbabaff/CordSync/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.8--1.21+-brightgreen.svg)](https://papermc.io)
 [![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://adoptium.net/)
