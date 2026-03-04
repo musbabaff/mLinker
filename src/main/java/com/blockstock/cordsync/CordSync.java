@@ -288,6 +288,14 @@ public class CordSync extends JavaPlugin {
         }
     }
 
+    public void reloadDiscordBot() {
+        if (discordBot != null) {
+            discordBot.shutdown();
+            discordBot = null;
+        }
+        initializeDiscordBot(getConfig());
+    }
+
     public static CordSync getInstance() {
         return instance;
     }

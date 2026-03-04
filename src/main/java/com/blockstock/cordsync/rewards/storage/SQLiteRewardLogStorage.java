@@ -26,7 +26,18 @@ public class SQLiteRewardLogStorage implements RewardLogStorage {
 
     private void connect() {
         try {
-            File dbFile = new File(plugin.getDataFolder(), "reward-logs.db");
+            File dataFolder = new File(plugin.getDataFolder(), "data");
+            if (!dataFolder.exists()) {
+                dataFolder.mkdirs();
+            }
+
+            File oldDbFile = new File(plugin.getDataFolder(), "reward-logs.db");
+            File dbFile = new File(dataFolder, "reward-logs.db");
+
+            if (oldDbFile.exists() && !dbFile.exists()) {
+                oldDbFile.renameTo(dbFile);
+                plugin.getLogger().info("📦 Migrated reward-logs.db to data/ folder.");
+            }
             if (!dbFile.getParentFile().exists())
                 dbFile.getParentFile().mkdirs();
 

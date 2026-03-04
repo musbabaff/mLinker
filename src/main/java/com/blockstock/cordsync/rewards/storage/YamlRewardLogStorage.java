@@ -20,7 +20,18 @@ public class YamlRewardLogStorage implements RewardLogStorage {
 
     public YamlRewardLogStorage(CordSync plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder(), "reward-logs.yml");
+        File dataFolder = new File(plugin.getDataFolder(), "data");
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+
+        File oldFile = new File(plugin.getDataFolder(), "reward-logs.yml");
+        this.file = new File(dataFolder, "reward-logs.yml");
+
+        if (oldFile.exists() && !this.file.exists()) {
+            oldFile.renameTo(this.file);
+            plugin.getLogger().info("📦 Migrated reward-logs.yml to data/ folder.");
+        }
 
         if (!file.exists()) {
             try {

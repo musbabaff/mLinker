@@ -60,7 +60,18 @@ public class RewardManager {
 
         this.rewardLogManager = new RewardLogManager(plugin);
 
-        this.dataFile = new File(plugin.getDataFolder(), "reward-data.yml");
+        File dataFolder = new File(plugin.getDataFolder(), "data");
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+
+        File oldDataFile = new File(plugin.getDataFolder(), "reward-data.yml");
+        this.dataFile = new File(dataFolder, "reward-data.yml");
+
+        if (oldDataFile.exists() && !this.dataFile.exists()) {
+            oldDataFile.renameTo(this.dataFile);
+            plugin.getLogger().info("📦 Migrated reward-data.yml to data/ folder.");
+        }
         if (!dataFile.exists()) {
             try {
                 dataFile.getParentFile().mkdirs();

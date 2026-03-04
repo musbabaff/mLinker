@@ -27,12 +27,12 @@ public class CordSyncReloadCommand implements CommandExecutor {
         long start = System.currentTimeMillis();
 
         // YapÄ±landÄ±rma ve mesaj dosyalarÄ±nÄ± yeniden yÃ¼kle
+        plugin.saveDefaultConfig(); // Restore config.yml if it was deleted
         plugin.reloadConfig();
         MessageUtil.load(plugin);
 
-        // Not: Ä°leride RewardManager (Ã–dÃ¼l Sistemi) veya Discord Bot durumu
-        // config'den tekrar Ã§ekilecekse buraya bir yenileme metodu ekleyebilirsin.
-        // Ã–rn: plugin.getRewardManager().reload();
+        // CanlÄ± Discord botunu config gÃ¼ncellemeleriyle beraber yeniden baÅŸlat
+        plugin.reloadDiscordBot();
 
         long took = System.currentTimeMillis() - start;
 
@@ -44,4 +44,3 @@ public class CordSyncReloadCommand implements CommandExecutor {
         return true;
     }
 }
-
