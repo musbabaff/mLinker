@@ -116,6 +116,9 @@ public class CordSync extends JavaPlugin {
 
         new UpdateChecker(this).checkForUpdates();
 
+        int pluginId = 24656; // bStats Plugin ID
+        org.bstats.bukkit.Metrics metrics = new org.bstats.bukkit.Metrics(this, pluginId);
+
         getLogger().info(MessageUtil.get("plugin.enabled"));
     }
 

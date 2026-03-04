@@ -111,6 +111,14 @@
       <artifactId>discord-webhooks</artifactId>
       <version>0.8.4</version>
     </dependency>
+
+    <!-- bStats -->
+    <dependency>
+        <groupId>org.bstats</groupId>
+        <artifactId>bstats-bukkit</artifactId>
+        <version>3.0.2</version>
+        <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -127,6 +135,10 @@
             <configuration>
               <createDependencyReducedPom>false</createDependencyReducedPom>
               <relocations>
+                <relocation>
+                  <pattern>org.bstats</pattern>
+                  <shadedPattern>com.blockstock.cordsync.metrics</shadedPattern>
+                </relocation>
               </relocations>
             </configuration>
           </execution>
