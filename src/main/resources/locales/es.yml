@@ -91,10 +91,18 @@ discord-embeds:
     
   buttons:
     link: "🔗 Vincular Cuenta"
-    how-to: "📖 Cómo vincular"
+    how-to: "📖 Cómo Vincular"
     status: "📊 Estado de la Cuenta"
     confirm: "✅ Confirmar"
     cancel: "❌ Cancelar"
+    
+  auto-message:
+    field-title: "✨ Cómo Funciona"
+    field-desc: "• 🎮 **Paso 1:** Escribe `/link` en Minecraft\n• 🖱️ **Paso 2:** Haz clic en el botón de abajo\n• 🔑 **Paso 3:** Introduce tu código\n• ✅ **Paso 4:** ¡Confirmar!"
+    footer: "CordSync • Sistema de Vinculación"
+    
+  booster-message:
+    footer: "CordSync • Recompensas Booster"
     
   ui:
     status-title: "📊 Estado de la Cuenta"

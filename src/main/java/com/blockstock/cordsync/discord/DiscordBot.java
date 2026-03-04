@@ -358,6 +358,8 @@ public class DiscordBot extends ListenerAdapter {
             String description = plugin.getConfig().getString("discord.auto-message.embed-description",
                     "Link your Minecraft account with Discord!");
             String colorHex = plugin.getConfig().getString("discord.auto-message.embed-color", "#00BFFF");
+            String image = plugin.getConfig().getString("discord.auto-message.embed-image", "");
+            String thumbnail = plugin.getConfig().getString("discord.auto-message.embed-thumbnail", "");
 
             Color embedColor;
             try {
@@ -370,11 +372,24 @@ public class DiscordBot extends ListenerAdapter {
                     .setTitle(title)
                     .setDescription(description)
                     .setColor(embedColor)
-                    .addField("\uD83D\uDCD6 How It Works",
-                            "1. Type `/link` in Minecraft\n2. Click the button below\n3. Enter your code\n4. Confirm!",
+                    .addField(MessageUtil.getRaw("discord-embeds.auto-message.field-title"),
+                            MessageUtil.getRaw("discord-embeds.auto-message.field-desc"),
                             false)
-                    .setFooter("CordSync \u2022 Account Linking System")
+                    .setFooter(MessageUtil.getRaw("discord-embeds.auto-message.footer"))
                     .setTimestamp(java.time.Instant.now());
+
+            if (image != null && !image.isEmpty()) {
+                try {
+                    embed.setImage(image);
+                } catch (Exception ignored) {
+                }
+            }
+            if (thumbnail != null && !thumbnail.isEmpty()) {
+                try {
+                    embed.setThumbnail(thumbnail);
+                } catch (Exception ignored) {
+                }
+            }
 
             // Premium button layout with modal trigger, info, and status
             channel.sendMessageEmbeds(embed.build())
@@ -421,6 +436,7 @@ public class DiscordBot extends ListenerAdapter {
             String description = plugin.getConfig().getString("discord.booster-message.embed-description",
                     "Boost our server to earn exclusive in-game rewards!");
             String colorHex = plugin.getConfig().getString("discord.booster-message.embed-color", "#FF73FA");
+            String thumbnail = plugin.getConfig().getString("discord.booster-message.embed-thumbnail", "");
 
             Color embedColor;
             try {
@@ -430,8 +446,18 @@ public class DiscordBot extends ListenerAdapter {
             }
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(title).setDescription(description).setColor(embedColor)
-                    .setFooter("CordSync \u2022 Booster Rewards").setTimestamp(java.time.Instant.now());
+                    .setTitle(title)
+                    .setDescription(description)
+                    .setColor(embedColor)
+                    .setFooter(MessageUtil.getRaw("discord-embeds.booster-message.footer"))
+                    .setTimestamp(java.time.Instant.now());
+
+            if (thumbnail != null && !thumbnail.isEmpty()) {
+                try {
+                    embed.setThumbnail(thumbnail);
+                } catch (Exception ignored) {
+                }
+            }
 
             channel.sendMessageEmbeds(embed.build())
                     .addActionRow(Button.secondary("cordsync_booster_info", "\uD83C\uDF81 View Rewards"))

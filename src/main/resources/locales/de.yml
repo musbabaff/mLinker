@@ -98,6 +98,14 @@ discord-embeds:
     confirm: "✅ Bestätigen"
     cancel: "❌ Abbrechen"
     
+  auto-message:
+    field-title: "✨ Wie es funktioniert"
+    field-desc: "• 🎮 **Schritt 1:** Tippe `/link` in Minecraft\n• 🖱️ **Schritt 2:** Klicke auf den Button unten\n• 🔑 **Schritt 3:** Gib deinen Code ein\n• ✅ **Schritt 4:** Bestätigen!"
+    footer: "CordSync • Kontoverknüpfung"
+    
+  booster-message:
+    footer: "CordSync • Booster Belohnungen"
+    
   ui:
     status-title: "📊 Account Status"
     status-linked-desc: "✅ Dein Account ist **sicher verbunden**!"

@@ -129,6 +129,14 @@ discord-embeds:
     confirm: "✅ Onayla"
     cancel: "❌ İptal Et"
     
+  auto-message:
+    field-title: "✨ Nasıl Çalışır?"
+    field-desc: "• 🎮 **Adım 1:** Oyunda `/link` yazın\n• 🖱️ **Adım 2:** Aşağıdaki butona tıklayın\n• 🔑 **Adım 3:** Kodunuzu girin\n• ✅ **Adım 4:** Onaylayın!"
+    footer: "CordSync • Hesap Bağlama Sistemi"
+    
+  booster-message:
+    footer: "CordSync • Booster Ödülleri"
+    
   ui:
     status-title: "📊 Hesap Durumu"
     status-linked-desc: "✅ Hesabınız **güvenli bir şekilde eşlendi**!"

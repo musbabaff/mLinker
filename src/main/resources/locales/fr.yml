@@ -91,10 +91,18 @@ discord-embeds:
     
   buttons:
     link: "🔗 Lier le Compte"
-    how-to: "📖 Comment lier"
+    how-to: "📖 Comment Lier"
     status: "📊 Statut du Compte"
     confirm: "✅ Confirmer"
     cancel: "❌ Annuler"
+    
+  auto-message:
+    field-title: "✨ Comment ça marche"
+    field-desc: "• 🎮 **Étape 1:** Tapez `/link` dans Minecraft\n• 🖱️ **Étape 2:** Cliquez sur le bouton ci-dessous\n• 🔑 **Étape 3:** Entrez votre code\n• ✅ **Étape 4:** Confirmer!"
+    footer: "CordSync • Lier le Compte"
+    
+  booster-message:
+    footer: "CordSync • Récompenses Booster"
     
   ui:
     status-title: "📊 Statut du Compte"

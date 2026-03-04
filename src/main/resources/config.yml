@@ -103,9 +103,9 @@ discord:
   auto-message:
     enabled: true
     channel-id: ""
-    embed-title: "🔗 Account Linking"
-    embed-description: "Link your Minecraft account with Discord to unlock exclusive features, rewards, and cross-platform integration!"
-    embed-color: "#00BFFF"
+    embed-title: "🎉 Welcome to CordSync!"
+    embed-description: "**Elevate your experience with us!** Dive into a world where your Minecraft account syncs seamlessly with Discord. We create experiences that keep players coming back for more.\n\n• ✨ **Unlock Exclusive Roles**: Get premium roles instantly.\n• 🎁 **Claim Daily Rewards**: Earn rewards just for being linked.\n• 💬 **Cross-Platform Chat**: Talk to players directly from Discord.\n\nReady to get started? Read the guide below."
+    embed-color: "#FF8C00"
     embed-thumbnail: ""
     embed-image: ""
     button-details: "**📖 How to Link:**\n\n1️⃣ Type `/link` in Minecraft\n2️⃣ Copy the 6-digit code\n3️⃣ Click **🔗 Link Account** below\n4️⃣ Enter your code in the form\n5️⃣ Confirm the linking\n\n✅ **Done!** Your account is now linked."
