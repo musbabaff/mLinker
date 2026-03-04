@@ -39,5 +39,5 @@ git push origin main --tags
 
 7. Create GitHub Release with the JAR file attached and the changelog as body:
 ```powershell
-gh release create v{VERSION} "target/CordSync-{VERSION}.jar" --title "CordSync v{VERSION}" --notes "{CHANGELOG_DESCRIPTION}"
+& "C:\Program Files\GitHub CLI\gh.exe" release create v{VERSION} "target/CordSync-{VERSION}.jar" --title "CordSync v{VERSION}" --notes "{CHANGELOG_DESCRIPTION}"
 ```
