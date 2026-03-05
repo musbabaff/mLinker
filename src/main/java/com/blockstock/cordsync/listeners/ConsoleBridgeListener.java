@@ -14,7 +14,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
-import java.awt.Color;
 import java.time.Instant;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -122,11 +121,11 @@ public class ConsoleBridgeListener extends ListenerAdapter {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 
                 EmbedBuilder embed = new EmbedBuilder()
-                        .setTitle(MessageUtil.getRaw("discord.console-bridge-title"))
+                        
                         .setDescription("```\n" + command + "\n```")
                         .addField(MessageUtil.getRaw("discord.console-bridge-field"), event.getAuthor().getAsMention(),
                                 true)
-                        .setColor(new Color(0, 200, 83))
+                        .setColor(java.awt.Color.decode("#2B2D31"))
                         .setFooter("CordSync • Console Bridge")
                         .setTimestamp(Instant.now());
 

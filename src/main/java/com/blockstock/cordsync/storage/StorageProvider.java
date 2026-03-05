@@ -23,7 +23,7 @@ public interface StorageProvider {
 
     boolean isDiscordLinked(String discordId);
 
-    // Suistimal korumasÄ± - unlink cooldown ve relink limiti
+    // Abuse protection - unlink cooldown and relink limit
     long getUnlinkTimestamp(UUID uuid);
 
     void setUnlinkTimestamp(UUID uuid, long timestamp);
@@ -54,7 +54,7 @@ public interface StorageProvider {
                 }
             }
         } catch (Exception e) {
-            CordSync.getInstance().getLogger().severe("âŒ getAllLinkedPlayers hatasÄ±: " + e.getMessage());
+            CordSync.getInstance().getLogger().severe("❌ Error in getAllLinkedPlayers: " + e.getMessage());
         }
         return result;
     }
@@ -64,13 +64,11 @@ public interface StorageProvider {
             File yamlFile = new File(CordSync.getInstance().getDataFolder(), "linked-accounts.yml");
             if (yamlFile.exists()) {
                 YamlConfiguration data = YamlConfiguration.loadConfiguration(yamlFile);
-                return data.getString("linked-accounts." + uuid + ".username", "Bilinmiyor");
+                return data.getString("linked-accounts." + uuid + ".username", "Unknown");
             }
         } catch (Exception e) {
-            CordSync.getInstance().getLogger().severe("âŒ getPlayerName hatasÄ±: " + e.getMessage());
+            CordSync.getInstance().getLogger().severe("❌ Error in getPlayerName: " + e.getMessage());
         }
-        return "Bilinmiyor";
+        return "Unknown";
     }
 }
-
-

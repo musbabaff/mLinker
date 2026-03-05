@@ -1,6 +1,6 @@
 name: CordSync
 main: com.blockstock.cordsync.CordSync
-version: 1.3.4
+version: 1.3.5
 author: musbabaff
 description: >
   Discord ↔ Minecraft account linking, verification and reward system.

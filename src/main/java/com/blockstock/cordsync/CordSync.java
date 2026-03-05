@@ -36,14 +36,8 @@ public class CordSync extends JavaPlugin {
     private RewardManager rewardManager;
     private RewardLogManager rewardLogManager;
     private ReverifyTask reverifyTask;
-    private final File migrationsDir;
-
     private boolean updateAvailable = false;
     private String latestVersion = "";
-
-    public CordSync() {
-        this.migrationsDir = new File(getDataFolder(), "migrations");
-    }
 
     public boolean isUpdateAvailable() {
         return updateAvailable;

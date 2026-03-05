@@ -63,9 +63,9 @@ public class LinkVerifyCommand extends ListenerAdapter {
             StorageProvider storage = plugin.getStorageProvider();
             if (storage.isDiscordLinked(event.getUser().getId())) {
                 EmbedBuilder embed = new EmbedBuilder()
-                        .setTitle(MessageUtil.get("discord.already-linked-title"))
-                        .setDescription(MessageUtil.get("discord.already-linked-desc"))
-                        .setColor(Color.RED)
+                        .setDescription("### " + MessageUtil.get("discord.already-linked-title") + "\n\n"
+                                + MessageUtil.get("discord.already-linked-desc"))
+                        .setColor(java.awt.Color.decode("#2B2D31"))
                         .setFooter("CordSync");
                 event.replyEmbeds(embed.build()).setEphemeral(true).queue();
                 return;
@@ -94,9 +94,8 @@ public class LinkVerifyCommand extends ListenerAdapter {
             String details = plugin.getConfig().getString("discord.auto-message.button-details",
                     "Details not configured.");
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("\uD83D\uDCD6 How to Link Your Account")
-                    .setDescription(details)
-                    .setColor(new Color(0, 191, 255))
+                    .setDescription("### \uD83D\uDCD6 How to Link Your Account\n\n" + details)
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync");
             event.replyEmbeds(embed.build()).setEphemeral(true).queue();
             return;
@@ -107,9 +106,9 @@ public class LinkVerifyCommand extends ListenerAdapter {
             String details = plugin.getConfig().getString("discord.booster-message.button-details",
                     "Details not configured.");
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(MessageUtil.getRaw("booster.info-title"))
-                    .setDescription(MessageUtil.getRaw("booster.info-desc") + "\n\n" + details)
-                    .setColor(new Color(255, 115, 250))
+                    .setDescription("### " + MessageUtil.getRaw("booster.info-title") + "\n\n"
+                            + MessageUtil.getRaw("booster.info-desc") + "\n\n" + details)
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync");
             event.replyEmbeds(embed.build()).setEphemeral(true).queue();
             return;
@@ -143,9 +142,9 @@ public class LinkVerifyCommand extends ListenerAdapter {
             String confirmId = buttonId.replace("cancel", "confirm");
             pendingConfirmations.remove(confirmId);
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(MessageUtil.getRaw("discord-embeds.ui.confirm-title-cancelled"))
-                    .setDescription(MessageUtil.getRaw("discord-embeds.ui.confirm-cancelled"))
-                    .setColor(Color.RED)
+                    .setDescription("### " + MessageUtil.getRaw("discord-embeds.ui.confirm-title-cancelled") + "\n\n"
+                            + MessageUtil.getRaw("discord-embeds.ui.confirm-cancelled"))
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync");
             event.replyEmbeds(embed.build()).setEphemeral(true).queue();
         }
@@ -228,9 +227,9 @@ public class LinkVerifyCommand extends ListenerAdapter {
         pendingConfirmations.put(confirmId, new PendingLink(uuid, playerName, code, event.getUser().getId()));
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(MessageUtil.getRaw("discord-embeds.ui.confirm-title"))
-                .setDescription(MessageUtil.getRaw("discord-embeds.ui.confirm-desc").replace("{player}", playerName))
-                .setColor(new Color(255, 165, 0))
+                .setDescription("### " + MessageUtil.getRaw("discord-embeds.ui.confirm-title") + "\n\n"
+                        + MessageUtil.getRaw("discord-embeds.ui.confirm-desc").replace("{player}", playerName))
+                .setColor(java.awt.Color.decode("#2B2D31"))
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-mc"), playerName, true)
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-dc"), event.getUser().getName(), true)
                 .setFooter("CordSync \u2022 2FA")
@@ -259,11 +258,11 @@ public class LinkVerifyCommand extends ListenerAdapter {
 
         if (!storage.isDiscordLinked(discordId)) {
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(MessageUtil.getRaw("discord-embeds.ui.status-title"))
-                    .setDescription(MessageUtil.getRaw("discord-embeds.ui.status-not-linked-desc"))
+                    .setDescription("### " + MessageUtil.getRaw("discord-embeds.ui.status-title") + "\n\n"
+                            + MessageUtil.getRaw("discord-embeds.ui.status-not-linked-desc"))
                     .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-status"),
                             MessageUtil.getRaw("discord-embeds.ui.status-val-not-linked"), false)
-                    .setColor(Color.RED)
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync");
             event.replyEmbeds(embed.build()).setEphemeral(true).queue();
             return;
@@ -275,8 +274,8 @@ public class LinkVerifyCommand extends ListenerAdapter {
         int relinkCount = uuid != null ? storage.getRelinkCount(uuid) : 0;
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(MessageUtil.getRaw("discord-embeds.ui.status-title"))
-                .setDescription(MessageUtil.getRaw("discord-embeds.ui.status-linked-desc"))
+                .setDescription("### " + MessageUtil.getRaw("discord-embeds.ui.status-title") + "\n\n"
+                        + MessageUtil.getRaw("discord-embeds.ui.status-linked-desc"))
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-mc"),
                         playerName != null ? playerName : "Unknown", true)
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-dc"), event.getUser().getName(), true)
@@ -288,7 +287,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
                         true)
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-status"),
                         MessageUtil.getRaw("discord-embeds.ui.status-val-linked"), true)
-                .setColor(new Color(0, 200, 83))
+                .setColor(java.awt.Color.decode("#2B2D31"))
                 .setFooter("CordSync")
                 .setTimestamp(java.time.Instant.now());
 
@@ -331,10 +330,9 @@ public class LinkVerifyCommand extends ListenerAdapter {
 
         // Success embed
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(MessageUtil.getRaw("discord-embeds.ui.success-title"))
-                .setDescription(
-                        MessageUtil.getRaw("discord-embeds.ui.success-desc").replace("{player}", pending.playerName))
-                .setColor(new Color(0, 200, 83))
+                .setDescription("### " + MessageUtil.getRaw("discord-embeds.ui.success-title") + "\n\n"
+                        + MessageUtil.getRaw("discord-embeds.ui.success-desc").replace("{player}", pending.playerName))
+                .setColor(java.awt.Color.decode("#2B2D31"))
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-mc"), pending.playerName, true)
                 .addField(MessageUtil.getRaw("discord-embeds.ui.status-field-dc"), event.getUser().getName(), true)
                 .setFooter("CordSync \u2022 Account Linked \u2705")
@@ -544,7 +542,8 @@ public class LinkVerifyCommand extends ListenerAdapter {
 
     private void sendEmbed(ModalInteractionEvent event, String title, String desc, Color color) {
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(title).setDescription(desc).setColor(color)
+                .setDescription("### " + title + "\n\n" + desc)
+                .setColor(java.awt.Color.decode("#2B2D31"))
                 .setFooter("CordSync").setTimestamp(java.time.Instant.now());
         event.replyEmbeds(embed.build()).setEphemeral(true).queue();
     }

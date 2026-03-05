@@ -23,7 +23,8 @@ public class ReverifyTask implements Runnable {
 
     public void start() {
         long interval = plugin.getConfig().getLong("link.reverify.interval-hours", 6);
-        if (interval <= 0) interval = 6;
+        if (interval <= 0)
+            interval = 6;
         long ticks = interval * 60 * 60 * 20;
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this, ticks, ticks);
     }
@@ -58,7 +59,7 @@ public class ReverifyTask implements Runnable {
 
             Guild guild = plugin.getDiscordBot().getJda().getGuildById(guildId);
             if (guild == null) {
-                plugin.getLogger().warning("âš  Belirtilen Discord sunucusu bulunamadÄ±: " + guildId);
+                plugin.getLogger().warning("⚠ Specified Discord guild not found: " + guildId);
                 return;
             }
 
@@ -69,25 +70,30 @@ public class ReverifyTask implements Runnable {
 
             for (UUID uuid : players) {
                 String discordId = storage.getDiscordId(uuid);
-                if (discordId == null) continue;
+                if (discordId == null)
+                    continue;
 
                 Member member = guild.retrieveMemberById(discordId).onErrorMap(err -> null).complete();
-                if (member == null || (verifiedRoleId != null && !verifiedRoleId.isEmpty() && member.getRoles().stream().noneMatch(r -> r.getId().equals(verifiedRoleId)))) {
+                if (member == null || (verifiedRoleId != null && !verifiedRoleId.isEmpty()
+                        && member.getRoles().stream().noneMatch(r -> r.getId().equals(verifiedRoleId)))) {
                     if (action.equalsIgnoreCase("unlink")) {
                         storage.removeLinkedAccount(uuid);
                         unlinked++;
                         Player player = Bukkit.getPlayer(uuid);
                         if (player != null) {
-                            player.sendMessage("Â§cDiscord baÄŸlantÄ±n otomatik olarak kaldÄ±rÄ±ldÄ± (Rol kaybÄ± veya sunucudan ayrÄ±lma).");
+                            player.sendMessage(
+                                    "§cYour Discord link was automatically removed (Lost role or left guild).");
                         }
                     } else if (action.equalsIgnoreCase("notify")) {
-                        plugin.getLogger().warning("âš  " + storage.getPlayerName(uuid) + " adlÄ± oyuncu doÄŸrulama rolÃ¼nÃ¼ kaybetmiÅŸ veya sunucuda deÄŸil.");
+                        plugin.getLogger().warning("⚠ Player " + storage.getPlayerName(uuid)
+                                + " lost the verification role or left the guild.");
                     }
                 }
                 checked++;
             }
 
-            plugin.getLogger().info("â™» ReVerify tamamlandÄ± â†’ Kontrol edilen: " + checked + ", kaldÄ±rÄ±lan: " + unlinked);
+            plugin.getLogger()
+                    .info("â™» ReVerify tamamlandÄ± â†’ Kontrol edilen: " + checked + ", kaldÄ±rÄ±lan: " + unlinked);
         } catch (Exception e) {
             plugin.getLogger().severe("âŒ ReVerify hatasÄ±: " + e.getMessage());
         }
@@ -101,5 +107,3 @@ public class ReverifyTask implements Runnable {
         }
     }
 }
-
-

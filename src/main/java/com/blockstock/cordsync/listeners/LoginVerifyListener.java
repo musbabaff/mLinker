@@ -23,7 +23,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import javax.annotation.Nonnull;
-import java.awt.Color;
 import java.time.Instant;
 
 /**
@@ -144,12 +143,12 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
                     20L * 60 * sessionMinutes);
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("✅ Login Approved")
+                    
                     .setDescription(
                             "You approved the login for **" + pending.playerName + "**.\nThey can now join the server.")
                     .addField("🌐 IP Address", censorIp(pending.ipAddress), true)
                     .addField("⏰ Session", sessionMinutes + " minutes", true)
-                    .setColor(new Color(0, 200, 83))
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync • 2FA Login")
                     .setTimestamp(Instant.now());
 
@@ -183,11 +182,11 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
             }
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("🚫 Login Denied")
-                    .setDescription("Login attempt for **" + pending.playerName
+                    
+                    .setDescription("### 🚫 Login Denied\n\nLogin attempt for **" + pending.playerName
                             + "** was denied.\n⚠️ If this wasn't you, your account may be compromised!")
                     .addField("🌐 IP Address", censorIp(pending.ipAddress), true)
-                    .setColor(Color.RED)
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync • 2FA Login")
                     .setTimestamp(Instant.now());
 
@@ -214,13 +213,13 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
             String serverName = plugin.getConfig().getString("server-name", "Minecraft Server");
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle("🔐 2FA Login Request")
-                    .setDescription("Someone is trying to join **" + serverName
+                    
+                    .setDescription("### 🔐 2FA Login Request\n\nSomeone is trying to join **" + serverName
                             + "** with your linked account.\n\nIs this you?")
                     .addField("👤 Username", playerName, true)
                     .addField("🌐 IP Address", censorIp(ip), true)
                     .addField("📅 Time", "<t:" + Instant.now().getEpochSecond() + ":f>", true)
-                    .setColor(new Color(255, 165, 0))
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync • 2FA Verification")
                     .setTimestamp(Instant.now());
 
@@ -253,11 +252,10 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
         boolean is2fa = plugin.getConfig().getBoolean("security.2fa-login.enabled", false);
         String title = joined ? "🟢 A player has joined the server" : "🔴 A player has left the server";
-        Color color = joined ? new Color(0, 200, 83) : new Color(255, 71, 87);
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(title)
-                .setColor(color)
+                .setDescription("### " + title)
+                .setColor(java.awt.Color.decode("#2B2D31"))
                 .addField("👤 Username", playerName, true)
                 .addField("🔐 2FA", is2fa ? "✅ Enabled" : "❌ Disabled", true)
                 .addField("💬 Discord", discordId != null ? "<@" + discordId + ">" : "Not Linked", true)

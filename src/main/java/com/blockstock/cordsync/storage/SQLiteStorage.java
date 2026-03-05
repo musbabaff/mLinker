@@ -52,7 +52,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
                     " first_reward_received INTEGER DEFAULT 0" +
                     ");");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ SQLite tablo oluÅŸturulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.executeUpdate();
             plugin.debug("SQLite: Successfully inserted/updated linked profile for UUID " + uuid.toString());
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Hesap kaydÄ± oluÅŸturulamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (rs.next())
                 return rs.getString("discord_id");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Discord ID alÄ±namadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return null;
     }
@@ -93,7 +93,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (rs.next())
                 return UUID.fromString(rs.getString("uuid"));
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ UUID alÄ±namadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return null;
     }
@@ -105,7 +105,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.setString(1, uuid.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ BaÄŸlantÄ± silinemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -117,7 +117,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Oyuncu baÄŸlantÄ± kontrolÃ¼ baÅŸarÄ±sÄ±z: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return false;
     }
@@ -130,7 +130,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Discord baÄŸlantÄ± kontrolÃ¼ baÅŸarÄ±sÄ±z: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return false;
     }
@@ -148,7 +148,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
                 map.put(uuid, new Migratable.LinkedData(username, discordId));
             }
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ KayÄ±tlar okunamadÄ± (SQLite): " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return map;
     }
@@ -172,7 +172,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
                 connection.rollback();
             } catch (Exception ignored) {
             }
-            plugin.getLogger().severe("âŒ KayÄ±tlar iÃ§e aktarÄ±lamadÄ± (SQLite): " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -185,7 +185,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
                 uuids.add(UUID.fromString(rs.getString("uuid")));
             }
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Oyuncu listesi alÄ±namadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return uuids;
     }
@@ -215,7 +215,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (rs.next())
                 return rs.getLong("unlink_time");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Unlink timestamp alÄ±namadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return 0;
     }
@@ -230,7 +230,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.setLong(3, timestamp);
             ps.executeUpdate();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Unlink timestamp kaydedilemedi: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -243,7 +243,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (rs.next())
                 return rs.getInt("relink_count");
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Relink sayÄ±sÄ± alÄ±namadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return 0;
     }
@@ -256,7 +256,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.setString(1, uuid.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Relink sayÄ±sÄ± artÄ±rÄ±lamadÄ±: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 
@@ -269,7 +269,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             if (rs.next())
                 return rs.getInt("first_reward_received") == 1;
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Ä°lk Ã¶dÃ¼l kontrolÃ¼ baÅŸarÄ±sÄ±z: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
         return false;
     }
@@ -282,7 +282,7 @@ public class SQLiteStorage implements StorageProvider, Migratable {
             ps.setString(1, uuid.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            plugin.getLogger().severe("âŒ Ä°lk Ã¶dÃ¼l kaydÄ± baÅŸarÄ±sÄ±z: " + e.getMessage());
+            plugin.getLogger().severe("❌ SQLite error: " + e.getMessage());
         }
     }
 }

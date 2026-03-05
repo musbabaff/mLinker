@@ -18,7 +18,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 
-import java.awt.Color;
 import java.time.Instant;
 
 @SuppressWarnings("null")
@@ -58,7 +57,7 @@ public class JoinQuitListener implements Listener {
 
             EmbedBuilder embed = new EmbedBuilder()
                     .setAuthor(authorText, null, skinUrl)
-                    .setColor(new Color(0, 200, 83))
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setThumbnail(skinUrl)
                     .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true)
                     .addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true)
@@ -100,7 +99,7 @@ public class JoinQuitListener implements Listener {
 
             EmbedBuilder embed = new EmbedBuilder()
                     .setAuthor(authorText, null, skinUrl)
-                    .setColor(new Color(255, 71, 87))
+                    .setColor(java.awt.Color.decode("#2B2D31"))
                     .setThumbnail(skinUrl)
                     .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true)
                     .addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true)

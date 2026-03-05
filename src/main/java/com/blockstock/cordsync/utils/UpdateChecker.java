@@ -3,7 +3,6 @@ package com.blockstock.cordsync.utils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 import org.bukkit.Bukkit;
 import org.json.simple.JSONObject;
@@ -17,7 +16,6 @@ public class UpdateChecker {
     private final String repoOwner = "musbabaff";
     private final String repoName = "CordSync";
     private final String githubAPI = "https://api.github.com/repos/%s/%s/releases/latest";
-    private final String repoURL = "https://github.com/%s/%s";
 
     public UpdateChecker(CordSync plugin) {
         this.plugin = plugin;
@@ -28,7 +26,7 @@ public class UpdateChecker {
             plugin.debug("UpdateChecker: Fetching latest release from GitHub...");
             try {
                 String apiUrl = String.format(githubAPI, repoOwner, repoName);
-                HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+                HttpURLConnection connection = (HttpURLConnection) java.net.URI.create(apiUrl).toURL().openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("User-Agent", "CordSync-UpdateChecker");
                 connection.setConnectTimeout(5000);

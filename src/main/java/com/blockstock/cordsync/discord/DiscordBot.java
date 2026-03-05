@@ -358,25 +358,24 @@ public class DiscordBot extends ListenerAdapter {
                     "\uD83D\uDD17 Account Linking");
             String description = plugin.getConfig().getString("discord.auto-message.embed-description",
                     "Link your Minecraft account with Discord!");
-            String colorHex = plugin.getConfig().getString("discord.auto-message.embed-color", "#00BFFF");
             String image = plugin.getConfig().getString("discord.auto-message.embed-image", "");
             String thumbnail = plugin.getConfig().getString("discord.auto-message.embed-thumbnail", "");
 
-            Color embedColor;
-            try {
-                embedColor = Color.decode(colorHex);
-            } catch (Exception e) {
-                embedColor = new Color(0, 191, 255);
-            }
+            Color embedColor = Color.decode("#2B2D31");
+
+            String fieldTitle = MessageUtil.getRaw("discord-embeds.auto-message.field-title");
+            String fieldDesc = MessageUtil.getRaw("discord-embeds.auto-message.field-desc");
+            String footerText = MessageUtil.getRaw("discord-embeds.auto-message.footer");
+
+            String markdownDesc = "### " + title + "\n\n" + description;
 
             EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(title)
-                    .setDescription(description)
+                    .setDescription(markdownDesc)
                     .setColor(embedColor)
-                    .addField(MessageUtil.getRaw("discord-embeds.auto-message.field-title"),
-                            MessageUtil.getRaw("discord-embeds.auto-message.field-desc"),
+                    .addField(fieldTitle != null ? fieldTitle : "How It Works",
+                            fieldDesc != null ? fieldDesc : "Click the button to link.",
                             false)
-                    .setFooter(MessageUtil.getRaw("discord-embeds.auto-message.footer"))
+                    .setFooter(footerText != null ? footerText : "CordSync")
                     .setTimestamp(java.time.Instant.now());
 
             if (image != null && !image.isEmpty()) {
@@ -392,12 +391,16 @@ public class DiscordBot extends ListenerAdapter {
                 }
             }
 
+            String btnLink = MessageUtil.getRaw("discord-embeds.buttons.link");
+            String btnHowTo = MessageUtil.getRaw("discord-embeds.buttons.how-to");
+            String btnStatus = MessageUtil.getRaw("discord-embeds.buttons.status");
+
             // Premium button layout with modal trigger, info, and status
             channel.sendMessageEmbeds(embed.build())
                     .addActionRow(
-                            Button.success("cordsync_link_modal", MessageUtil.getRaw("discord-embeds.buttons.link")),
-                            Button.primary("cordsync_howto_info", MessageUtil.getRaw("discord-embeds.buttons.how-to")),
-                            Button.secondary("cordsync_status", MessageUtil.getRaw("discord-embeds.buttons.status")))
+                            Button.success("cordsync_link_modal", btnLink != null ? btnLink : "Link"),
+                            Button.primary("cordsync_howto_info", btnHowTo != null ? btnHowTo : "How To"),
+                            Button.secondary("cordsync_status", btnStatus != null ? btnStatus : "Status"))
                     .queue(
                             success -> plugin.getLogger().info(MessageUtil.get("discord.auto-message-sent")),
                             failure -> plugin.getLogger().warning("Auto message failed: " + failure.getMessage()));
