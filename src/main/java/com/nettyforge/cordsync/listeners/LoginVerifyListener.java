@@ -61,6 +61,10 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
         if (!storage.isPlayerLinked(uuid))
             return;
 
+        // Check if player opted-in into 2FA!
+        if (!plugin.getTwoFactorEnabled(uuid))
+            return;
+
         String currentIp = getIpAddress(event.getAddress());
         String discordId = storage.getDiscordId(uuid);
         if (discordId == null)

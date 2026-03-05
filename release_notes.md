@@ -1,3 +1,37 @@
+# 🚀 CordSync v1.4.2 — 2FA & Smart Reverify Hotfix
+
+This patch introduces highly requested security features and rectifies Discord bridging bugs.
+
+### 🛡️ 2FA Security & Reverify
+- **Player-Controlled 2FA Toggle:** Players can now actively toggle Two-Factor Authentication via an interactive 🟥 **Toggle 2FA** button directly from the Discord link embed.
+- **Smart Reverify Localization:** Added the missing `reverify.start` translation key across all 10 language dictionaries, securing global readability.
+
+### 🛠️ Bridge & Config Fixes
+- **Join/Quit Sync Fixed:** Completely rewrote the Join/Quit listeners. Messages correctly map to your dedicated `discord.join-quit-messages.channel-id` variable.
+- **Console Bridge Hardening:** Wrapped the console bridge BukkitScheduler in a try-catch block, preventing the logger loop from permanently crashing on single-message exceptions.
+- **Config & Command Cleans:** Resolved corrupted charset issues in `/csinfo` and removed dummy `gui` string requirements from `config.yml`.
+
+---
+
+# 🚀 CordSync v1.4.1 — Localization & Polish Update
+
+This patch focuses on expanding the plugin's global reach, standardizing configuration files, and addressing critical bridge bugs.
+
+### 🌐 Global Localization Sync
+- Added 5 brand-new languages: `ru.yml` (Russian), `pl.yml` (Polish), `az.yml` (Azerbaijani), `zh.yml` (Chinese), and `ja.yml` (Japanese).
+- Synchronized all existing languages (`tr`, `de`, `es`, `fr`) to perfectly match the massive 229-key structure of `en.yml`.
+- Replaced hardcoded Turkish logs and missing keys (e.g. `discord.unlinked`) with dynamic translation variables.
+
+### 🛠️ Config & Bridge Fixes
+- **ASCII Art Update:** Repainted the `config.yml` header logo from the deprecated CORDSYN to the modern CORDSYNC design.
+- **Join/Quit Sync:** Repaired the logic and configuration paths that prevented player join/quit events from displaying in Discord.
+- **Chat Bridge:** Fixed bidirectional chat relay permission/webhook logic. Discord <-> Game communication now flows flawlessly.
+- **Reward Clean-up:** Removed the legacy `items` node from linking rewards; rewards are now purely command-driven (e.g. `eco give`).
+- **Clean Console:** Suppressed JDA's internal INFO-level WebSocket logs to prevent console spam.
+- **IDE Cleanups:** Removed unused imports (like `TextChannel` in `ChatBridgeListener`).
+
+---
+
 # 🚀 CordSync v1.4.0 — The Ultimate Performance Update
 
 The long-awaited **v1.4.0** is here! This is the most massive update since the creation of CordSync, focusing on **Zero-Impact Performance**, **brand-new premium modules**, and **dynamic integrations**.

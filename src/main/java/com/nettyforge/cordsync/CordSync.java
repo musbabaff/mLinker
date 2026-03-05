@@ -71,6 +71,36 @@ public class CordSync extends JavaPlugin {
         this.latestVersion = latestVersion;
     }
 
+    private org.bukkit.configuration.file.YamlConfiguration twoFactorConfig;
+    private File twoFactorFile;
+
+    public void loadTwoFactorConfig() {
+        twoFactorFile = new File(getDataFolder(), "2fa-settings.yml");
+        if (!twoFactorFile.exists()) {
+            try {
+                twoFactorFile.createNewFile();
+            } catch (Exception ignored) {
+            }
+        }
+        twoFactorConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(twoFactorFile);
+    }
+
+    public boolean getTwoFactorEnabled(UUID uuid) {
+        if (twoFactorConfig == null)
+            loadTwoFactorConfig();
+        return twoFactorConfig.getBoolean(uuid.toString(), false);
+    }
+
+    public void setTwoFactorEnabled(UUID uuid, boolean enabled) {
+        if (twoFactorConfig == null)
+            loadTwoFactorConfig();
+        twoFactorConfig.set(uuid.toString(), enabled);
+        try {
+            twoFactorConfig.save(twoFactorFile);
+        } catch (Exception ignored) {
+        }
+    }
+
     // Change SLF4J/JDK logging level for JDA explicitly to prevent WebSocketClient
     // spam
     private void suppressJDALogs() {

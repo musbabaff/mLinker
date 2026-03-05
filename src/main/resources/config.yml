@@ -139,9 +139,7 @@ discord:
       # Discord Role ID: LuckPerms group name
       "DISCORD_ROLE_ID_HERE": "booster"
 
-  # ── GUI Settings ────────────────────────────────────────────────────
-  gui:
-    enabled: true
+
 
 # ┌──────────────────────────────────────────────────────────────────────┐
 # │  SECURITY & ANTI-ABUSE                                               │
@@ -225,7 +223,6 @@ rewards:
     commands:
       - "lp user {player} parent addtemp vip 7d"
       - "eco give {player} 5000"
-      - "eco give {player} 5000"
 
   # ── Interval Reward ─────────────────────────────────────────────────
   interval:
@@ -234,7 +231,6 @@ rewards:
     message: "&a[CordSync] &e💎 Your Discord link is active! Daily reward added!"
     commands:
       - "eco give {player} 1000"
-      - "eco give {player} 1000"
 
   # ── Booster Reward ──────────────────────────────────────────────────
   booster:
@@ -242,7 +238,6 @@ rewards:
     message: "&a[CordSync] &d🚀 Thanks for boosting! You earned a special booster reward!"
     commands:
       - "lp user {player} parent addtemp booster 30d"
-      - "eco give {player} 10000"
       - "eco give {player} 10000"
 
 # ┌──────────────────────────────────────────────────────────────────────┐

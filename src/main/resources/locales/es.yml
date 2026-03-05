@@ -223,6 +223,9 @@ security:
   2fa-approved: "&8[&a&l✓&8] &fPuertos reabridos. El Discord confía en ti."
   2fa-denied: "&8[&c&l✗&8] &fRompiste y negaste. Falsa alarma a todos de invasión eminente."
 
+reverify:
+  start: "&8[&a&l✓&8] &aProceso de reverificación inteligente iniciado."
+
 system:
   reload: "&8[&a&l✓&8] &aRenovado CordSync configura localmente."
   reload-detailed: "&8[&a&l✓&8] &aRenovado en un santiamén &f{time}ms&a y reiniciado."

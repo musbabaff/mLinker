@@ -223,6 +223,9 @@ security:
   2fa-approved: "&8[&a&l✓&8] &fGüvənli giriş Discord 2FA ilə təsdiqləndi."
   2fa-denied: "&8[&c&l✗&8] &fGiriş cəhdi rədd edildi! Əgər bu siz deyilirsinizsə, administratora bildirin."
 
+reverify:
+  start: "&8[&a&l✓&8] &aAğıllı yenidən doğrulama prosesi başladıldı."
+
 system:
   reload: "&8[&a&l✓&8] &aCordSync konfiqurasiya və dilləri yeniləndi."
   reload-detailed: "&8[&a&l✓&8] &aCordSync &f{time}ms&a içində yeniləndi."

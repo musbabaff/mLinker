@@ -223,6 +223,9 @@ security:
   2fa-approved: "&8[&a&l✓&8] &fAccessibilité reconnue! Validation locale effectuée!"
   2fa-denied: "&8[&c&l✗&8] &fIntrusion stoppée au coeur du système anti bungeecord bypass spoof! Refusée."
 
+reverify:
+  start: "&8[&a&l✓&8] &aProcessus de re-vérification intelligente lancé."
+
 system:
   reload: "&8[&a&l✓&8] &aCordSync a balayé ses fichiers sources."
   reload-detailed: "&8[&a&l✓&8] &aCordSync restructuré chronométriquement localisé au score: &f{time}ms&a."

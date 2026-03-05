@@ -415,7 +415,8 @@ public class DiscordBot extends ListenerAdapter {
                     .addActionRow(
                             Button.success("cordsync_link_modal", btnLink != null ? btnLink : "Link"),
                             Button.primary("cordsync_howto_info", btnHowTo != null ? btnHowTo : "How To"),
-                            Button.secondary("cordsync_status", btnStatus != null ? btnStatus : "Status"))
+                            Button.secondary("cordsync_status", btnStatus != null ? btnStatus : "Status"),
+                            Button.danger("cordsync_toggle_2fa", "Toggle 2FA"))
                     .queue(
                             success -> plugin.getLogger().info(MessageUtil.get("discord.auto-message-sent")),
                             failure -> plugin.getLogger().warning("Auto message failed: " + failure.getMessage()));

@@ -223,6 +223,9 @@ security:
   2fa-approved: "&8[&a&l✓&8] &fDiscord 2FA を通じたログインが承認されました。"
   2fa-denied: "&8[&c&l✗&8] &fログインは明確に拒否されました。あなた自身でない場合は管理者に警告してください。"
 
+reverify:
+  start: "&8[&a&l✓&8] &aスマート再検証プロセスが開始されました。"
+
 system:
   reload: "&8[&a&l✓&8] &aCordSyncの設定と翻訳ファイルが再読み込みされました。"
   reload-detailed: "&8[&a&l✓&8] &aCordSyncは &f{time}ms&a で再読み込みされました。"

@@ -223,6 +223,9 @@ security:
   2fa-approved: "&8[&a&l✓&8] &fSicherer Login per Discord 2FA genehmigt."
   2fa-denied: "&8[&c&l✗&8] &fLogin-Versuch blockiert! Falls du das nicht warst, melde es sofort dem Support."
 
+reverify:
+  start: "&8[&a&l✓&8] &aIntelligenter Neuverifizierungsprozess gestartet."
+
 system:
   reload: "&8[&a&l✓&8] &aCordSync Konfiguration und Sprachen neu geladen."
   reload-detailed: "&8[&a&l✓&8] &aCordSync neu geladen in &f{time}ms&a."

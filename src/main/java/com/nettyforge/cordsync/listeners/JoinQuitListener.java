@@ -17,6 +17,7 @@ import com.nettyforge.cordsync.utils.MessageUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import java.time.Instant;
 
@@ -66,7 +67,15 @@ public class JoinQuitListener implements Listener {
                     .setTimestamp(Instant.now());
 
             if (plugin.getDiscordBot() != null) {
-                plugin.getDiscordBot().sendLogEmbed(null, null, null, embed);
+                String chId = plugin.getConfig().getString("discord.join-quit-messages.channel-id", "");
+                if (chId != null && !chId.isEmpty()) {
+                    try {
+                        TextChannel tc = plugin.getDiscordBot().getJda().getTextChannelById(chId);
+                        if (tc != null)
+                            tc.sendMessageEmbeds(embed.build()).queue();
+                    } catch (Exception ignored) {
+                    }
+                }
             }
         });
     }
@@ -108,7 +117,15 @@ public class JoinQuitListener implements Listener {
                     .setTimestamp(Instant.now());
 
             if (plugin.getDiscordBot() != null) {
-                plugin.getDiscordBot().sendLogEmbed(null, null, null, embed);
+                String chId = plugin.getConfig().getString("discord.join-quit-messages.channel-id", "");
+                if (chId != null && !chId.isEmpty()) {
+                    try {
+                        TextChannel tc = plugin.getDiscordBot().getJda().getTextChannelById(chId);
+                        if (tc != null)
+                            tc.sendMessageEmbeds(embed.build()).queue();
+                    } catch (Exception ignored) {
+                    }
+                }
             }
         });
     }

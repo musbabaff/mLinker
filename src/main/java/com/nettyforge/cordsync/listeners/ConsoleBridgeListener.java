@@ -57,20 +57,24 @@ public class ConsoleBridgeListener extends ListenerAdapter {
         Bukkit.getLogger().addHandler(logHandler);
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            if (!running || messageQueue.isEmpty())
-                return;
+            try {
+                if (!running || messageQueue.isEmpty())
+                    return;
 
-            StringBuilder batch = new StringBuilder();
-            String line;
-            while ((line = messageQueue.poll()) != null) {
-                if (batch.length() + line.length() + 1 > 1900) {
-                    sendConsoleMessage(batch.toString());
-                    batch = new StringBuilder();
+                StringBuilder batch = new StringBuilder();
+                String line;
+                while ((line = messageQueue.poll()) != null) {
+                    if (batch.length() + line.length() + 1 > 1900) {
+                        sendConsoleMessage(batch.toString());
+                        batch = new StringBuilder();
+                    }
+                    batch.append(line).append("\n");
                 }
-                batch.append(line).append("\n");
-            }
-            if (batch.length() > 0) {
-                sendConsoleMessage(batch.toString());
+                if (batch.length() > 0) {
+                    sendConsoleMessage(batch.toString());
+                }
+            } catch (Throwable t) {
+                plugin.getLogger().warning("Error in ConsoleBridge task: " + t.getMessage());
             }
         }, 60L, 60L); // 3 seconds
     }

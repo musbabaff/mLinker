@@ -12,17 +12,16 @@ public class CordSyncInfoCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         CordSync plugin = CordSync.getInstance();
 
-        sender.sendMessage("Â§8Â§mâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”");
-        sender.sendMessage("Â§bÂ§lCordSync Â§7v" + plugin.getDescription().getVersion());
-        sender.sendMessage("Â§7GeliÅŸtirici: Â§fmusbabaff");
+        sender.sendMessage("§8§m--------------------------------");
+        sender.sendMessage("§b§lCordSync §7v" + plugin.getDescription().getVersion());
+        sender.sendMessage("§7Developer: §fmusbabaff");
         sender.sendMessage("");
-        sender.sendMessage("Â§7Depolama: Â§f" + plugin.getConfig().getString("storage.type", "Bilinmiyor"));
-        sender.sendMessage("Â§7Dil: Â§f" + plugin.getConfig().getString("language", "TR"));
-        sender.sendMessage("Â§7ReVerify: Â§f" + (plugin.getReverifyTask() != null ? "Â§aAktif" : "Â§cPasif"));
-        sender.sendMessage("Â§7Discord Botu: Â§f" + (plugin.getDiscordBot() != null ? "Â§aBaÄŸlÄ±" : "Â§cKapalÄ±"));
-        sender.sendMessage("Â§8Â§mâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”");
+        sender.sendMessage("§7Storage: §f" + plugin.getConfig().getString("storage.type", "Unknown"));
+        sender.sendMessage("§7Language: §f" + plugin.getConfig().getString("language", "en"));
+        sender.sendMessage("§7ReVerify: §f" + (plugin.getReverifyTask() != null ? "§aActive" : "§cPassive"));
+        sender.sendMessage("§7Discord Bot: §f" + (plugin.getDiscordBot() != null ? "§aConnected" : "§cOffline"));
+        sender.sendMessage("§8§m--------------------------------");
 
         return true;
     }
 }
-

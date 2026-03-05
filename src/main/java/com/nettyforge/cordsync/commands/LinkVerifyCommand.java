@@ -169,6 +169,27 @@ public class LinkVerifyCommand extends ListenerAdapter {
                     .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync");
             event.replyEmbeds(embed.build()).setEphemeral(true).queue();
+            return;
+        }
+
+        // ---- TOGGLE 2FA BUTTON ----
+        if (buttonId.equals("cordsync_toggle_2fa")) {
+            StorageProvider storage = plugin.getStorageProvider();
+            String discordId = event.getUser().getId();
+            if (!storage.isDiscordLinked(discordId)) {
+                event.reply("\u274C You must link your account first!").setEphemeral(true).queue();
+                return;
+            }
+            UUID uuid = storage.getPlayerUUID(discordId);
+            if (uuid == null)
+                return;
+
+            boolean isEnabled = plugin.getTwoFactorEnabled(uuid);
+            plugin.setTwoFactorEnabled(uuid, !isEnabled);
+            String state = !isEnabled ? "\u2705 **Enabled**" : "\u274C **Disabled**";
+            event.reply("Your 2FA login security has been " + state + ". (Effective immediately)").setEphemeral(true)
+                    .queue();
+            return;
         }
     }
 
