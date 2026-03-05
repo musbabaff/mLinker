@@ -1,45 +1,71 @@
-# 💬 Commands & Permissions
+# 📋 Commands & Permissions
 
-CordSync keeps commands simple to use while offering powerful administrative features through the Discord Bot.
-
-## 🕹️ Minecraft Commands
-
-| Command | Aliases | Description | Permission |
-|---------|---------|-------------|------------|
-| `/link` | `/hesapesle`, `/mlink` | Generates a 6-digit connection code, or opens the GUI. | `cordsync.use` |
-| `/unlink` | | Removes the player's Discord link safely. | `cordsync.use` |
-
-*By default, all players have the `cordsync.use` permission.*
-
-### Admin / VIP Permissions
-| Permission Node | Description |
-|-----------------|-------------|
-| `cordsync.chatbridge` | Allows a player's messages to be sent via the Webhook Chat Bridge to Discord. Give this to VIPs and staff to make them stand out! |
+Complete reference for all CordSync commands, aliases, and permissions.
 
 ---
 
-## 🤖 Discord Slash Commands
+## Player Commands
 
-| Command | Usage | Description |
-|---------|-------|-------------|
-| `/link [code]` | `/link 123456` | Verifies a Minecraft linking code and links accounts. |
-| `/unlink` | `/unlink` | Removes the Discord connection from the Minecraft account. |
-
-*These commands can be used within any channel where the bot has permission, but they are completely hidden from other users using **Ephemeral Messages**!*
+| Command | Aliases | Description | Permission | Default |
+|---|---|---|---|---|
+| `/link` | `/hesapesle`, `/mlink`, `/cslink` | Open the account linking GUI or start the linking process | `cordsync.use` | ✅ All |
+| `/unlink` | `/hesapkaldir`, `/munlink`, `/csunlink` | Remove the link between your Minecraft and Discord accounts | `cordsync.use` | ✅ All |
+| `/report <player> <reason>` | — | Report a player to Discord admins with interactive buttons | — | ✅ All |
+| `/bug <description>` | `/bugreport`, `/hata` | Submit a technical bug report (includes TPS, RAM, coordinates) | `cordsync.bug` | ✅ All |
+| `/ticket create <message>` | `/destek`, `/csticket` | Open a two-way support ticket with Discord staff | `cordsync.ticket` | ✅ All |
 
 ---
 
-## 📦 PlaceholderAPI (PAPI) Placeholders
+## Staff Commands
 
-Use these in menus, scoreboards, and tablists! You must have PlaceholderAPI installed to use these.
+| Command | Aliases | Description | Permission | Default |
+|---|---|---|---|---|
+| `/staffchat <message>` | `/sc`, `/staffc` | Send a cross-server message to online staff via Discord | `cordsync.staffchat` | ❌ OP |
 
-| Placeholder | Value / Output |
-|-------------|----------------|
-| `%cordsync_is_linked%` | `true` or `false` |
-| `%cordsync_discord_name%` | Player's Discord Username (e.g. `musbabaff`) |
-| `%cordsync_discord_tag%` | Player's Server Display Name |
-| `%cordsync_discord_id%` | Player's 18-digit Discord ID |
-| `%cordsync_discord_avatar%` | URL to the player's Discord Avatar |
-| `%cordsync_discord_role%` | Their Highest Discord Role Name |
-| `%cordsync_linked_count%` | Total number of linked accounts stored in DB |
-| `%cordsync_online_linked%` | Current amount of linked players online in server |
+---
+
+## Admin Commands
+
+| Command | Aliases | Description | Permission | Default |
+|---|---|---|---|---|
+| `/csreload` | `/cordsyncreload`, `/csrl` | Reload all CordSync configuration files | `cordsync.admin` | ❌ OP |
+| `/csinfo` | `/cordsyncinfo`, `/csver` | Show CordSync status, version info, and API details | `cordsync.admin` | ❌ OP |
+| `/csreverify` | `/reverify`, `/linkcheck` | Manually start the smart re-verification system | `cordsync.admin` | ❌ OP |
+
+---
+
+## Discord Slash Commands
+
+| Command | Description | Configuration |
+|---|---|---|
+| `/<configurable>` | Link your Minecraft account with Discord (name set in `config.yml`) | `commands.discord-slash-command` |
+
+---
+
+## Permission Nodes
+
+| Permission | Description | Default |
+|---|---|---|
+| `cordsync.use` | Account linking and unlinking commands | All players |
+| `cordsync.bug` | Submit bug reports via `/bug` | All players |
+| `cordsync.ticket` | Open support tickets via `/ticket` | All players |
+| `cordsync.chat` | Cross-chat messaging permission | All players |
+| `cordsync.staffchat` | Staff chat access | OP only |
+| `cordsync.admin` | Full admin access (reload, info, reverify) | OP only |
+| `cordsync.rewards` | Access to the reward system | OP only |
+| `cordsync.reverify` | Manual re-verification trigger | OP only |
+| `cordsync.api` | CordSync API access and management | OP only |
+
+---
+
+## Discord Button Interactions
+
+These are not commands but interactive Discord button clicks handled by the plugin:
+
+| Button | Location | Action |
+|---|---|---|
+| `✅ Approve` / `🚫 Deny` | 2FA DM | Approve or deny a login request |
+| `🔇 Mute` / `🚷 Kick` / `⛔ Ban` | Moderation log | Opens a Modal form for punishment details |
+| `📍 Teleport` | Player report embed | Teleports linked staff to the reported player |
+| `🔗 Link` | Auto-message embed | Opens the account linking modal |
+| `❓ How To` / `📊 Status` | Auto-message embed | Info and linking status buttons |

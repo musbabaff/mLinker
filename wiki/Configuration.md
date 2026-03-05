@@ -1,35 +1,162 @@
-# ⚙️ Configuration & Features
+# ⚙️ Configuration Guide
 
-CordSync offers extensive configuration to tailor the plugin precisely to your server's needs.
-
-## Premium Modules Overview
-
-### 🔐 2FA Login Protection
-Found in `config.yml` under `2fa-login`. When players join the server, their connection will be halted, and a Direct Message (DM) will be sent to their linked Discord account with a verification embed. If they press "Approve", they log in immediately. If "Deny" is pressed, the server kicks them.
-
-### 🎮 In-Game GUI Menu
-Type `/link` or `/hesapesle` to open a beautiful, chest-based graphical interface. Players can see their Discord ID, linked status, available rewards, and link/unlink directly from the UI.
-
-### 🖥️ Console Bridge
-Found under `console-bridge`. Input a Discord channel ID where the server console will be mirrored in real-time. Admins can type commands like `say Hello` or `kick Player` directly into the Discord channel, and they execute securely on the Minecraft server. You can protect this by providing an `admin-role-id` and a `blocked-commands` list.
-
-### 🌐 Webhook Chat Bridge
-In the `chat-bridge` section, you can input a **Discord Webhook URL**. Once configured, whenever a player chats in-game, the Webhook will send the message to Discord, automatically replacing the avatar with the player's **Minecraft Skin Head** and their name! 
-
-### ⬇️ Join/Quit Embeds
-In the `discord.join-quit-messages` section, linked players will trigger rich Discord embeds in a selected channel whenever they join or leave the server. These embeds show their current Discord Roles, Minecraft Skins as thumbnails, and current online player count.
-
-### 🔄 Reverse Sync (Discord -> LuckPerms)
-Usually, CordSync gives Discord roles when a player links their Minecraft account. **Reverse Sync** does the opposite! In the `reverse-sync` section, you can map Discord Role IDs to LuckPerms group names.
-- Example: If a linked user receives the "Nitro Booster" role on Discord, CordSync will instantly grant them the `booster` rank on the Minecraft server via LuckPerms!
+CordSync uses a modular configuration system. The main `config.yml` controls core settings, while each module has its own config file under `plugins/CordSync/modules/<module>/config.yml`.
 
 ---
 
-## 🌎 Multi-Language Locales
-Every single piece of text, including GUI titles, lores, and Discord Bot embeds, can be translated and modified via the `plugins/CordSync/locales/` folder.
+## Core Configuration (`config.yml`)
 
-To switch languages:
-1. Open `config.yml`.
-2. Change the `language` key (e.g., `en`, `tr`, `de`, `es`, `fr`).
-3. Reload the plugin or restart the server.
-*If a key is accidentally deleted, the plugin will safely fall back to `en.yml` to prevent errors!*
+### Discord Bot Settings
+
+```yaml
+discord:
+  token: "YOUR_BOT_TOKEN_HERE"        # Bot token from Discord Developer Portal
+  guild-id: "YOUR_GUILD_ID"           # Your Discord server ID
+  role-id-verified: "ROLE_ID"         # Role given to verified/linked players
+  log-channel-id: "CHANNEL_ID"        # Channel for system log embeds
+
+  status:
+    rotate: true                       # Enable rotating status messages
+    interval: 15                       # Seconds between status rotations
+    messages:
+      - "PLAYING:{online} Players Online | CordSync"
+      - "WATCHING:{linked} Linked Accounts"
+```
+
+### Security & 2FA
+
+```yaml
+security:
+  2fa-login:
+    enabled: true                      # Enable 2FA login protection
+    session-minutes: 5                 # Session approval duration
+  force-link: false                    # Require linking before play
+  alt-protection: true                 # Block alt accounts
+```
+
+### Chat Bridge
+
+```yaml
+chat-bridge:
+  enabled: true
+  channel-id: "CHANNEL_ID"            # Discord channel for chat bridge
+  discord-to-mc: "ALL"                # ALL or LINKED_ONLY
+  minecraft-format: "&7[&bDiscord&7] &f{player}&7: &f{message}"
+  ignored-prefixes:
+    - "/"
+    - "!"
+```
+
+### Storage
+
+```yaml
+storage:
+  type: YAML                           # Options: YAML, SQLITE, MYSQL
+  mysql:                               # Only needed if type is MYSQL
+    host: "localhost"
+    port: 3306
+    database: "cordsync"
+    username: "root"
+    password: "password"
+```
+
+---
+
+## Module Configurations
+
+### Enabling/Disabling Modules (`modules.yml`)
+
+```yaml
+modules:
+  report-module: true       # 🚨 /report + /bug system
+  live-status: true          # 📊 MSPT & Performance Monitor
+  security-module: true      # 🛡️ Alt-Account Protection
+  moderation-module: true    # 🔨 Interactive Modal Moderation
+  leaderboard-module: true   # 🏆 Dynamic AJLeaderboards
+  voice-module: true         # 🎧 WorldGuard Voice Channels
+  ticket-module: true        # 🎫 Two-Way Ticket System
+  # ... and more
+```
+
+> ⚠️ A server restart is recommended after toggling modules.
+
+---
+
+### 📊 Live Status Module (`modules/livestatus/config.yml`)
+
+```yaml
+discord:
+  status-channel-id: "CHANNEL_ID"     # Channel containing the status embed
+  message-id: "MESSAGE_ID"            # ID of the message to edit
+  update-interval: 30                  # Seconds between Discord embed updates
+messages:
+  embed-title: "📊 Live Server Status"
+  embed-color: "#2B2D31"
+```
+
+### 🚨 Report & Bug Module (`modules/report/config.yml`)
+
+```yaml
+report-channel-id: "CHANNEL_ID"       # Channel for player reports
+bug-reports-channel-id: "CHANNEL_ID"  # Channel for bug reports
+report-cooldown-seconds: 60           # Cooldown between reports
+bug-cooldown-seconds: 300             # Cooldown between bug reports (5 min)
+```
+
+### 🔨 Moderation Module (`modules/moderation/config.yml`)
+
+```yaml
+log-channel-id: "CHANNEL_ID"          # Channel for moderation alerts
+forbidden-words:                       # Words that trigger the chat filter
+  - "fuck"
+  - "shit"
+mute-command: "mute {player} {duration} {reason}"
+kick-command: "kick {player} {reason}"
+ban-command: "ban {player} {duration} {reason}"
+```
+
+### 🏆 Leaderboard Module (`modules/leaderboard/config.yml`)
+
+```yaml
+boards:
+  top_kills:
+    channel-id: "CHANNEL_ID"
+    message-id: ""                     # Auto-saved on first send
+    title: "⚔️ Top 10 Killers"
+    ajlb-board: "statistic_player_kills"
+    update-interval: 600               # Seconds (10 minutes)
+    embed-color: "#FFD700"
+  top_money:
+    channel-id: "CHANNEL_ID"
+    title: "💸 Top 10 Richest Players"
+    ajlb-board: "vault_eco_balance"
+    update-interval: 600
+    embed-color: "#2ECC71"
+```
+
+> 💡 You can add unlimited boards — just add new sections under `boards:`.
+
+### 🎧 Voice Module (`modules/voice/config.yml`)
+
+```yaml
+category-id: "CATEGORY_ID"            # Discord category for voice channels
+channel-name-format: "🎮 {region}"    # Format for created channel names
+regions:                               # WorldGuard regions to monitor
+  - "pvp_arena"
+  - "spawn"
+```
+
+### 🎫 Ticket Module (`modules/ticket/config.yml`)
+
+```yaml
+ticket-category-id: "CATEGORY_ID"     # Discord category for ticket channels
+ticket-channel-format: "ticket-{player}"
+```
+
+---
+
+## Tips
+
+- **Never hardcode text** — All player-facing messages are configurable
+- **Channel IDs** — Right-click a channel in Discord → Copy ID (enable Developer Mode in Discord settings)
+- **Hot Reload** — Use `/csreload` to reload configs without restarting (module configs require restart)

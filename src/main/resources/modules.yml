@@ -1,0 +1,20 @@
+# ╔════════════════════════════════════════════════════════════════════╗
+# ║                      NETTYFORGE MODULAR SYSTEM                     ║
+# ╠════════════════════════════════════════════════════════════════════╣
+# ║ Manage all standalone features from this single configuration.     ║
+# ║ » Set to 'true' to load the module into memory (Zero RAM cost).    ║
+# ║ » Set to 'false' to completely disable it.                         ║
+# ║ Note: A server restart is highly recommended after toggling!       ║
+# ╚════════════════════════════════════════════════════════════════════╝
+modules:
+  report-module: true   # [🚨] Interactive /report system to Discord
+  live-status: true     # [📊] Real-time TPS, RAM, and Player count embed
+  security-module: true # [🛡️] Alt-Account protection & Forced Linking
+  economy-module: true  # [💰] PAPI & Vault Discord slash commands
+  devops-module: true   # [⚙️] TPS Alarms, Console Filter, Broadcaster
+  rewards-module: true  # [🎁] Discord Voice XP & Activity Rewards
+  network-module: true  # [🌐] Cross-Server Staff Chat & Discord Relay
+  ticket-module: true   # [🎫] In-Game to Discord 2-Way Ticket System
+  moderation-module: true # [🔨] Interactive Discord Moderation
+  leaderboard-module: true # [🏆] Async Discord Leaderboards
+  voice-module: true       # [🎧] Dynamic WorldGuard Voice Channels

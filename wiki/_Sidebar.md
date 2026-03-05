@@ -1,4 +1,7 @@
 - [CordSync Wiki](Home)
-- [Installation Guide](Installation)
+- [Setup Guide](Setup_Guide)
+- [Installation](Installation)
 - [Configuration & Features](Configuration)
 - [Commands & Permissions](Commands-&-Permissions)
+- [PlaceholderAPI Integration](PlaceholderAPI)
+- [CordSync Modules (Premium)](Modules)

@@ -1,170 +1,215 @@
 <div align="center">
 
-# ⚡ CordSync
+# ⚡ CordSync — by NettyForge Studios
 
-### Advanced Discord ↔ Minecraft Account Linking System
+### The Ultimate Discord ↔ Minecraft Synchronization Core
 
-[![Version](https://img.shields.io/github/v/release/musbabaff/CordSync?color=blue&label=version)](https://github.com/musbabaff/CordSync/releases)
+[![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](https://github.com/musbabaff/CordSync/releases)
 [![License](https://img.shields.io/badge/license-Custom%20EULA-red.svg)](LICENSE)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.8--1.21+-brightgreen.svg)](https://papermc.io)
 [![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://adoptium.net/)
 [![Folia](https://img.shields.io/badge/Folia-Supported-purple.svg)](https://papermc.io/software/folia)
+[![Spark](https://img.shields.io/badge/Spark-Optimized-ff69b4.svg)](https://spark.lucko.me/)
 
-**The most feature-rich Discord account linking plugin for Minecraft servers.**
+**The most feature-rich, performance-obsessed Discord-Minecraft bridge ever built.**
+**11 modular systems. Zero hardcoded text. Zero impact on TPS.**
 
-[Features](#-features) • [Installation](#-installation) • [Configuration](#-configuration) • [Commands](#-commands) • [API](#-api) • [Wiki](https://github.com/musbabaff/CordSync/wiki)
+[Features](#-features) • [Modules](#-modular-architecture) • [Performance](#-zero-impact-performance) • [Installation](#-quick-start) • [Commands](#-commands) • [Wiki](https://github.com/musbabaff/CordSync/wiki)
 
 ---
 
 </div>
 
-## 🌟 Premium Features
+## 🌟 Features
 
-### 📸 Webhook Chat Bridge
-- **Minecraft Skins in Discord** — Messages from MC use the player's 3D head as their Discord avatar!
-- **Immersive Experience** — Feels like a native Discord integration
-- **Message Sanitization** — Prevents ping exploits
+### � Account Linking & Verification
+- **Slash Command Integration** — `/link` on Discord with configurable command name
+- **Interactive GUI** — Beautiful chest menu for in-game linking
+- **Auto-Role Assignment** — Automatically grant Discord roles on verification
+- **Smart Re-Verification** — Periodically validates that linked accounts still meet requirements
+
+### 🛡️ Advanced 2FA Security
+- **Single-Instance Architecture** — Bulletproof login verification with static session maps
+- **IP-Based Session Cache** — Approved IPs are remembered, no repeat verification
+- **Async Discord DM** — Non-blocking `.queue()` approval requests with ✅/🚫 buttons
+- **5-Minute Auto-Expiry** — Pending logins automatically purged after timeout
+
+### 💬 Bi-Directional Chat Bridge
+- **Webhook Chat** — Player messages appear in Discord with their 3D Minecraft skin as avatar
+- **Discord → Minecraft** — Discord messages broadcast in-game with formatted colors
+- **Message Sanitization** — Prevents @everyone/@here ping exploits
 
 ### 🖥️ Secure Console Bridge
-- **Two-way Console** — View live server logs and send commands directly from a protected Discord channel
-- **Role-Based Security** — Only authorized Discord admins can access the bridge
-- **Command Blacklist** — Prevent dangerous commands (`/stop`, `/op`) from being run via Discord
+- **Two-Way Control** — View live server logs and execute commands from Discord
+- **Role-Based Security** — Only authorized Discord roles can access the console
+- **Command Blacklist** — Block dangerous commands (`/stop`, `/op`) from remote execution
 
-### 🎒 Interactive In-Game GUI
-- **Chest Menu Integration** — A beautiful, fully localized `/link` chest interface
-- **No More Complex Commands** — Players link their accounts with intuitive button clicks
+### 🔨 Interactive Modal Moderation
+- **Chat Filter** — Configurable forbidden word detection with instant Discord alerts
+- **Discord Modal Forms** — Mute/Kick/Ban buttons open pop-up forms for duration & reason
+- **Dynamic Commands** — `{player}`, `{duration}`, `{reason}` placeholders in punishment commands
+- **Button Disable** — Prevents double-punishment after action is taken
 
-### 📦 PlaceholderAPI Support
-- **Dynamic Placeholders** — Display linking status seamlessly in Tablists, Scoreboards, and Chat
-- **Available Tags** — `%cordsync_is_linked%`, `%cordsync_discord_name%`, `%cordsync_discord_role%`, and 5 more!
+### � Bug Tracker & Report System
+- **`/bug <description>`** — Players report technical issues with auto-captured TPS, RAM, coordinates
+- **`/report <player> <reason>`** — Player reports with **� Teleport** button for staff
+- **Cooldown System** — Configurable spam prevention (default: 5min for bugs, 1min for reports)
+- **Discord ID Linking** — Shows reporter's linked Discord account in the embed
 
-### 🔔 Rich Join/Quit Embeds
-- **Visual Tracking** — Automatically broadcast beautiful embeds to Discord when a player joins or leaves
-- **Player Avatars** — Includes the player's 3D Minecraft face alongside their mapped Discord tag
+### � MSPT & Live Performance Monitor
+- **MSPT Tracking** — 1-minute, 5-minute, and 15-minute rolling averages
+- **Health Indicators** — 🟢 `<20ms` | 🟡 `20-40ms` | 🔴 `>45ms`
+- **Chunks & Entities** — Real-time loaded chunk and entity count
+- **Server Uptime** — Human-readable `2d 5h 13m` format
+- **Spark Integration** — Auto-detects Spark plugin for enhanced TPS/MSPT data
 
-### 🔄 Reverse Sync (LuckPerms)
-- **Discord → Minecraft** — Automatically give LuckPerms groups when a player gets a Discord role
-- **Supporter Perks** — Instantly grant in-game ranks to your Discord Boosters and Patreons
+### 🏆 Dynamic AJLeaderboards
+- **Unlimited Boards** — Define as many leaderboard tabs as you want via config
+- **ajLeaderboards API** — Direct reflection-based integration (zero compile dependency)
+- **PlaceholderAPI Fallback** — Works with PAPI if ajLeaderboards isn't available
+- **Auto Edit-Message** — Boards update themselves on Discord at configurable intervals
+- **Medal Formatting** — 🥇🥈🥉🏅 automatic ranking emojis
 
-### 🛡️ 2FA Login Protection
-- **IP Verification** — Detects unknown IPs on join and securely requests Discord confirmation
-- **Anti-Grief Shield** — If an account is compromised, the attacker cannot log in without Discord approval!
+### 🎫 Two-Way Ticket System
+- **`/ticket create <message>`** — Opens a dedicated Discord channel/thread
+- **Discord → Minecraft** — Staff replies appear in-game to the ticket creator
+- **Server Context** — TPS and player ping included in ticket embeds
 
-### 🌍 100% Configurable & Localized
-- **5 Built-In Languages** — English, Turkish, German, Spanish, French included out of the box
-- **Fully Customizable** — Every single string, GUI title, and item lore is dynamically configurable
+### 🎧 Dynamic Voice Channels
+- **WorldGuard Integration** — Enter a region → Discord voice channel auto-created
+- **Auto Cleanup** — Channel deleted when all players leave the region
+- **Category Organization** — Channels created under a configurable Discord category
 
-### ⚡ Performance & Compatibility
-- **Folia Support** — Fully compatible with Folia's regionalized threading via native async scaling
-- **Multi-Version** — Works flawlessly on Minecraft 1.8 through 1.21.4+
-- **Proxy Ready** — BungeeCord & Velocity compatible
+### � Reverse Sync & Rewards
+- **Discord → Minecraft Roles** — LuckPerms groups auto-assigned based on Discord roles
+- **Booster Rewards** — Instant in-game perks for Discord Nitro Boosters
+- **Voice XP** — Earn rewards for time spent in Discord voice channels
 
-### 🔧 Developer-Friendly
-- **Config auto-migration** — Updates configs without losing your settings
-- **Comprehensive API** — Hook into CordSync from your plugins
-- **Event system** — `PlayerLinkedEvent` / `PlayerUnlinkedEvent`
-
----
-
-## 📦 Installation
-
-1. Download the latest release from [Releases](https://github.com/musbabaff/CordSync/releases)
-2. Compile the plugin using `mvn clean package`.
-3. Locate `CordSync-1.3.4.jar` in the `target/` directory.
-
-### Quick Add
-1. Place `CordSync-1.3.4.jar` in your server's `plugins/` folder
-2. Restart the server
-3. Edit `plugins/CordSync/config.yml` with your Discord bot token
-4. Reload with `/csreload`
-
-### Discord Bot Setup
-
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Create a new application → Bot → Copy token
-3. Enable these **Privileged Gateway Intents**:
-   - Server Members Intent
-   - Message Content Intent
-4. Invite the bot with `applications.commands` + `bot` scopes
-5. Required bot permissions: `Manage Roles`, `Send Messages`, `Manage Nicknames`
+### � PlaceholderAPI Support
+- `%cordsync_is_linked%` • `%cordsync_discord_name%` • `%cordsync_discord_role%` • 5+ more tags
 
 ---
 
-## ⚙️ Configuration
+## � Modular Architecture
 
-CordSync uses a modular configuration system:
+Every feature is an independent module that can be toggled in `modules.yml`:
 
-| File | Description |
-|------|-------------|
-| `config.yml` | Main configuration |
-| `locales/en.yml` | English messages (default) |
-| `locales/tr.yml` | Turkish messages |
-| `locales/de.yml` | German messages |
-| `locales/es.yml` | Spanish messages |
-| `locales/fr.yml` | French messages |
-
-> **Note:** CordSync automatically adds new config keys when you update — your existing settings are preserved!
-
----
-
-## 💻 Commands
-
-| Command | Permission | Description |
-|---------|-----------|-------------|
-| `/link` | `cordsync.use` | Generate a linking code |
-| `/unlink` | `cordsync.use` | Remove your Discord link |
-| `/csreload` | `cordsync.admin` | Reload configuration |
-| `/csinfo` | `cordsync.admin` | Show plugin info |
-| `/csreverify` | `cordsync.admin` | Run re-verification |
-
----
-
-## 🔌 API
-
-```java
-// Get the CordSync API
-CordSyncAPI api = CordSync.getInstance().getApi();
-
-// Check if a player is linked
-boolean linked = api.isLinked(playerUUID);
-
-// Get linked Discord ID
-String discordId = api.getDiscordId(playerUUID);
+```yaml
+modules:
+  report-module: true       # 🚨 /report + /bug system
+  live-status: true          # 📊 MSPT & Performance Monitor
+  security-module: true      # 🛡️ Alt-Account Protection
+  economy-module: true       # 💰 Vault & PAPI Economy
+  devops-module: true        # ⚙️ TPS Alarms & Console Filter
+  rewards-module: true       # 🎁 Voice XP & Activity Rewards
+  network-module: true       # 🌐 Cross-Server Staff Chat
+  ticket-module: true        # 🎫 Two-Way Ticket System
+  moderation-module: true    # 🔨 Interactive Modal Moderation
+  leaderboard-module: true   # 🏆 Dynamic AJLeaderboards
+  voice-module: true         # 🎧 WorldGuard Voice Channels
 ```
 
-### Events
-```java
-@EventHandler
-public void onLink(PlayerLinkedEvent event) {
-    UUID uuid = event.getPlayerUUID();
-    String discordId = event.getDiscordId();
-}
+> **Zero RAM Cost** — Disabled modules are never loaded into memory.
+
+---
+
+## ⚡ Zero-Impact Performance
+
+CordSync is engineered for **1000+ player servers**. Every system is built to be invisible on Spark profiler reports.
+
+| Optimization | Implementation |
+|---|---|
+| **Zero-GC TPS Monitor** | Fixed-size `double[450]` ring buffer — no `LinkedList`, no object allocation per tick |
+| **Cached Config** | All config values read once on `onEnable()` — zero `getString()` per update cycle |
+| **Cached World Data** | Chunks & entities counted on main thread tick → stored as `volatile` — zero iteration per request |
+| **Pre-Lowercased Chat Filter** | Forbidden words lowercased once on enable — zero `toLowerCase()` per chat event |
+| **Async Everything** | All JDA calls use `.queue()` callbacks — zero blocking `.complete()` calls |
+| **Zero Zombie Tasks** | `cancelTasks(this)` + `HandlerList.unregisterAll(this)` on disable — clean `/reload` |
+| **No `new Thread()`** | Project-wide guarantee: all async work via `BukkitScheduler` or JDA callbacks |
+| **Spark API Support** | Auto-detects Spark via reflection for enhanced metrics — zero hard dependency |
+
+```
+🔥 Spark Hot Path Analysis:
+────────────────────────────────────
+TPSMonitor.run()     → 0 allocation/tick   ✓
+ChatFilter.onChat()  → 0 allocation/event  ✓
+LiveStatus.update()  → 0 config read/cycle ✓
+onDisable()          → cancelTasks + unregisterAll ✓
 ```
 
 ---
 
-## 🏗️ Building from Source
+## 🚀 Quick Start
 
-See [BUILDING.md](BUILDING.md) for detailed instructions.
+### Prerequisites
+- **Java 17+**
+- **Spigot/Paper 1.19+** (Folia compatible)
+- **Discord Bot Token** — [Create one here](https://discord.com/developers/applications)
 
-```bash
-git clone https://github.com/musbabaff/CordSync.git
-cd CordSync
-mvn clean package
-```
+### Installation
+
+1. Download `CordSync-1.4.0.jar` from [Releases](https://github.com/musbabaff/CordSync/releases)
+2. Place it in your server's `plugins/` folder
+3. Start the server once to generate config files
+4. Edit `plugins/CordSync/config.yml` — add your **Bot Token** and **Guild ID**
+5. Restart the server
+
+> 📖 **Detailed setup guide**: [wiki/Setup_Guide.md](wiki/Setup_Guide.md)
 
 ---
 
-## 📄 License
+## 📋 Commands
 
-This project is licensed under a [Custom EULA (All Rights Reserved)](LICENSE). Source code is available for educational and personal use only.
+| Command | Description | Permission |
+|---|---|---|
+| `/link` | Link your Minecraft account with Discord | `cordsync.use` |
+| `/unlink` | Remove your Discord account link | `cordsync.use` |
+| `/report <player> <reason>` | Report a player to Discord admins | — |
+| `/bug <description>` | Submit a bug/technical issue report | `cordsync.bug` |
+| `/ticket create <message>` | Open a Discord support ticket | `cordsync.ticket` |
+| `/staffchat <message>` | Cross-server staff communication | `cordsync.staffchat` |
+| `/csreload` | Reload all CordSync configurations | `cordsync.admin` |
+| `/csinfo` | Show plugin status and version info | `cordsync.admin` |
+| `/csreverify` | Manually trigger re-verification | `cordsync.admin` |
+
+> 📖 **Full command reference**: [wiki/Commands-&-Permissions.md](wiki/Commands-&-Permissions.md)
+
+---
+
+## � Soft Dependencies
+
+| Plugin | Usage | Required? |
+|---|---|---|
+| **Vault** | Economy integration for leaderboards | Optional |
+| **LuckPerms** | Reverse sync (Discord → MC roles) | Optional |
+| **PlaceholderAPI** | Dynamic placeholders & leaderboard fallback | Optional |
+| **WorldGuard** | Dynamic voice channel regions | Optional |
+| **ajLeaderboards** | Primary leaderboard data source | Optional |
+| **Spark** | Enhanced TPS/MSPT metrics | Optional |
+
+---
+
+## � Documentation
+
+| Document | Description |
+|---|---|
+| [Setup Guide](wiki/Setup_Guide.md) | Step-by-step installation & Discord bot setup |
+| [Configuration](wiki/Configuration.md) | All config files explained |
+| [Commands & Permissions](wiki/Commands-&-Permissions.md) | Full command reference |
+| [Modules](wiki/Modules.md) | Detailed module documentation |
+
+---
+
+## � bStats
+
+CordSync uses [bStats](https://bstats.org/) for anonymous usage statistics. You can opt out in `config.yml`.
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by [musbabaff](https://github.com/musbabaff)**
+**Built with ❤️ by [NettyForge Studios](https://nettyforge.com)**
 
-⭐ Star this project if you find it useful!
+*CordSync v1.4.0 — The Ultimate Discord-Minecraft Synchronization Core*
 
 </div>

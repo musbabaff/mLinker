@@ -1,0 +1,30 @@
+﻿
+out.txt:36:[ERROR] COMPILATION ERROR : 
+out.txt:38:[ERROR] /C:/mLinker/src/main/java/com/bloc
+kstock/cordsync/modules/rewards/RewardsModule.java:[8
+6,49] cannot find symbol
+out.txt:49:[ERROR] Failed to execute goal org.apache.
+maven.plugins:maven-compiler-plugin:3.11.0:compile (d
+efault-compile) on project CordSync: Compilation fail
+ure
+out.txt:50:[ERROR] /C:/mLinker/src/main/java/com/bloc
+kstock/cordsync/modules/rewards/RewardsModule.java:[8
+6,49] cannot find symbol
+out.txt:51:[ERROR]   symbol:   method getStorage()
+out.txt:52:[ERROR]   location: variable plugin of typ
+e com.blockstock.cordsync.CordSync
+out.txt:53:[ERROR] 
+out.txt:54:[ERROR] -> [Help 1]
+out.txt:55:[ERROR] 
+out.txt:56:[ERROR] To see the full stack trace of the
+ errors, re-run Maven with the -e switch.
+out.txt:57:[ERROR] Re-run Maven using the -X switch t
+o enable full debug logging.
+out.txt:58:[ERROR] 
+out.txt:59:[ERROR] For more information about the err
+ors and possible solutions, please read the following
+ articles:
+out.txt:60:[ERROR] [Help 1] http://cwiki.apache.org/c
+onfluence/display/MAVEN/MojoFailureException
+
+
