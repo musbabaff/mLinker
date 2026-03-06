@@ -181,7 +181,8 @@ discord:
   console-bridge-blocked: "🚫 Bu komanda təhlükəsizlik səbəbiylə bloklanıb."
   console-bridge-title: "🖥️ Komanda Uğurla İcra Edildi"
   console-bridge-field: "👤 İcra Edən"
-
+  console-bridge-footer: "CordSync • Console Bridge"
+  console-bridge-error: "❌ Xəta: {error}"
   disabled: "Discord bot inteqrasiyası deaktiv edilib."
   no-token: "Discord bot tokeni yoxdur. Lütfən config.yml faylında quraşdırın."
   started: "✅ CordSync Discord Bot bağlandı və fəaliyyət göstərir."
@@ -194,6 +195,24 @@ discord:
   role-remove-error: "❌ Rol silinərkən xəta: {error}"
   role-fail: "❌ Rol silinmədi: {error}"
   luckperms-role-removed: "✅ Sinxronizasiya edilən rol {role} {player} profilindən silindi."
+  verified-console: "✅ {player} təsdiqləndi və bağlandı."
+
+modules:
+  enabled: "📦 Aktiv edilən modül: {module}"
+  skipped: "📦 Modül atlandı (Config'dən bağlıdır): {module}"
+  unknown-command: "Naməlum komanda. Kömək üçün \"/help\" yazın."
+
+commands:
+  help-title: "&b--- CordSync Komandaları ---"
+  help-link: "&f/link - Əlaqələndirmə kodu yarat"
+  help-unlink: "&f/unlink - Hesabının əlaqəsini kəs"
+  help-report: "&f/report <oyunçu> <səbəb> - Oyunçunu şikayət et"
+  help-bug: "&f/bug <açıqlama> - Xəta bildir"
+  help-ticket: "&f/ticket - Dəstək sorğusu aç"
+  help-staffchat: "&f/staffchat <mesaj> - Serverlərarası yetkili çatı"
+  help-admin-info: "&7/csinfo - Plugin məlumatını göstər"
+  help-admin-reload: "&7/csreload - Ayarları yenilə"
+  help-admin-reverify: "&7/csreverify - Ağıllı doğrulamaya məcbur et"
 
 join-quit:
   join-author: "⬆️ {role}{player} serverə qoşuldu"

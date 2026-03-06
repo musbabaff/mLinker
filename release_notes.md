@@ -1,3 +1,14 @@
+# 🚀 CordSync v1.4.3 — Critical Locale Structure Fix
+
+This hotfix resolves the **Missing message key: discord.log-linked** error that appeared in Discord log embeds after account linking.
+
+### 🐛 Root Cause & Fix
+- **YAML Key Misplacement Fixed:** The discord bot keys (`log-linked`, `log-unlinked`, `disabled`, `started`, `bot-stopped`, `failed`, `auto-message-sent`, `unlinked`, `role-remove-error`, `role-fail`, `luckperms-role-removed`) were incorrectly nested under the `commands:` section instead of `discord:` in all 10 language files.
+- **All 10 Locales Corrected:** Moved 12 keys from `commands:` to `discord:` across `en`, `tr`, `de`, `es`, `fr`, `ru`, `pl`, `az`, `zh`, `ja`.
+- **New Key Added:** `discord.verified-console` added to all locales.
+
+---
+
 # 🚀 CordSync v1.4.2 — 2FA & Smart Reverify Hotfix
 
 This patch introduces highly requested security features and rectifies Discord bridging bugs.

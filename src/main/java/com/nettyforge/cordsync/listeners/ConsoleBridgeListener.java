@@ -1,7 +1,10 @@
 package com.nettyforge.cordsync.listeners;
 
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Filter;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.filter.AbstractFilter;
 
 import org.bukkit.Bukkit;
 
@@ -23,7 +26,7 @@ public class ConsoleBridgeListener extends ListenerAdapter {
     private final CordSync plugin;
     private final LinkedBlockingQueue<String> messageQueue = new LinkedBlockingQueue<>();
     private boolean running = false;
-    private Handler logHandler;
+    private AbstractFilter log4jFilter;
 
     public ConsoleBridgeListener(CordSync plugin) {
         this.plugin = plugin;
@@ -34,27 +37,43 @@ public class ConsoleBridgeListener extends ListenerAdapter {
             return;
         running = true;
 
-        logHandler = new Handler() {
+        Logger coreLogger = (Logger) LogManager.getRootLogger();
+
+        log4jFilter = new AbstractFilter() {
             @Override
-            public void publish(LogRecord record) {
-                if (record != null && record.getMessage() != null) {
-                    String msg = "[" + record.getLevel().getName() + "] " + record.getMessage();
-                    if (msg.length() > 1900)
-                        msg = msg.substring(0, 1900) + "...";
-                    messageQueue.offer(msg);
+            public Result filter(LogEvent event) {
+                if (!running) return Result.NEUTRAL;
+                
+                String loggerName = event.getLoggerName();
+                if (loggerName != null && (loggerName.startsWith("net.dv8tion") || loggerName.startsWith("okhttp3"))) {
+                    return Result.NEUTRAL;
                 }
-            }
 
-            @Override
-            public void flush() {
-            }
+                String msg = event.getMessage().getFormattedMessage();
+                if (msg == null || msg.trim().isEmpty()) return Result.NEUTRAL;
+                
+                // Infinite loop protection
+                if (msg.contains("CordSync \u2022 Console Bridge") 
+                    || msg.contains("Console Bridge active")
+                    || msg.contains("rate limit")
+                    || msg.contains("Unknown error while executing")) {
+                    return Result.NEUTRAL; 
+                }
 
-            @Override
-            public void close() throws SecurityException {
+                String formatted = "[" + event.getLevel().name() + "] " + msg;
+                formatted = formatted.replaceAll("\u001B\\[[;\\d]*m", "");
+                
+                if (formatted.length() > 1900) {
+                    formatted = formatted.substring(0, 1900) + "...";
+                }
+                
+                messageQueue.offer(formatted);
+                return Result.NEUTRAL;
             }
         };
 
-        Bukkit.getLogger().addHandler(logHandler);
+        log4jFilter.start();
+        coreLogger.addFilter(log4jFilter);
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             try {
@@ -74,16 +93,20 @@ public class ConsoleBridgeListener extends ListenerAdapter {
                     sendConsoleMessage(batch.toString());
                 }
             } catch (Throwable t) {
-                plugin.getLogger().warning("Error in ConsoleBridge task: " + t.getMessage());
+                // Ignore errors here to prevent infinite loop logging.
             }
-        }, 60L, 60L); // 3 seconds
+        }, 30L, 30L); // 1.5 seconds
     }
 
     public void stop() {
         running = false;
-        if (logHandler != null) {
-            Bukkit.getLogger().removeHandler(logHandler);
-            logHandler = null;
+        if (log4jFilter != null) {
+            Logger coreLogger = (Logger) LogManager.getRootLogger();
+            try {
+                coreLogger.getClass().getMethod("removeFilter", Filter.class).invoke(coreLogger, log4jFilter);
+            } catch (Exception ignored) { }
+            log4jFilter.stop();
+            log4jFilter = null;
         }
     }
 
@@ -136,12 +159,12 @@ public class ConsoleBridgeListener extends ListenerAdapter {
                         .addField(MessageUtil.getRaw("discord.console-bridge-field"), event.getAuthor().getAsMention(),
                                 true)
                         .setColor(java.awt.Color.decode("#2B2D31"))
-                        .setFooter("CordSync • Console Bridge")
+                        .setFooter(MessageUtil.getRaw("discord.console-bridge-footer"))
                         .setTimestamp(Instant.now());
 
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();
             } catch (Exception e) {
-                event.getMessage().reply("❌ Error: " + e.getMessage()).queue();
+                event.getMessage().reply(MessageUtil.getRaw("discord.console-bridge-error").replace("{error}", e.getMessage())).queue();
             }
         });
     }

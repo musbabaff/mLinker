@@ -181,19 +181,38 @@ discord:
   console-bridge-blocked: "🚫 このコマンドはセキュリティ上の理由からブロックされています。"
   console-bridge-title: "🖥️ コマンドが正常に実行されました"
   console-bridge-field: "👤 実行者"
-
+  console-bridge-footer: "CordSync • Console Bridge"
+  console-bridge-error: "❌ エラー: {error}"
   disabled: "Discord ボット の連携は無効化されています。"
   no-token: "Discord ボット トークンが存在しないか無効です。config.ymlで設定してください。"
   started: "✅ CordSync Discord ボット が接続され、動作しています。"
   bot-stopped: "CordSync Discord ボット が切断されました。"
   failed: "❌ Discord ボット の起動に失敗しました: {error}"
   auto-message-sent: "✅ インタラクティブな自動メッセージが連携チャンネルに送信されました。"
-  log-linked: "🔗 **{player}** がアカウントを連携しました。"
+  log-linked: "🔗 **{player}** がアカウントを安全に連携しました。"
   log-unlinked: "🔓 **{player}** がアカウントの連携を解除しました。"
   unlinked: "✅ Core Discord ロール が正常に削除されました。"
   role-remove-error: "❌ ロールの削除中にエラーが発生しました: {error}"
   role-fail: "❌ ロールの削除に失敗しました: {error}"
   luckperms-role-removed: "✅ プレイヤー {player} から同期ロール {role} を削除しました。"
+  verified-console: "✅ {player} が認証され、連携されました。"
+
+modules:
+  enabled: "📦 有効化されたモジュール: {module}"
+  skipped: "📦 スキップされたモジュール (設定で無効): {module}"
+  unknown-command: "不明なコマンドです。\"/help\"でヘルプを表示します。"
+
+commands:
+  help-title: "&b--- CordSync コマンド ---"
+  help-link: "&f/link - 連携コードを生成"
+  help-unlink: "&f/unlink - アカウントの連携を解除"
+  help-report: "&f/report <プレイヤー> <理由> - プレイヤーを報告"
+  help-bug: "&f/bug <説明> - バグを報告"
+  help-ticket: "&f/ticket - サポートチケットを開く"
+  help-staffchat: "&f/staffchat <メッセージ> - サーバー間スタッフチャット"
+  help-admin-info: "&7/csinfo - プラグイン情報を表示"
+  help-admin-reload: "&7/csreload - 設定を再読み込み"
+  help-admin-reverify: "&7/csreverify - スマート再認証を強制実行"
 
 join-quit:
   join-author: "⬆️ {role}{player} がサーバーに参加しました"

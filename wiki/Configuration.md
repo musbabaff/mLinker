@@ -30,6 +30,8 @@ security:
   2fa-login:
     enabled: true                      # Enable 2FA login protection
     session-minutes: 5                 # Session approval duration
+    request-timeout-seconds: 300       # 2FA button interaction timeout
+    2fa-log-channel-id: "CHANNEL_ID"   # Channel for detailed 2FA event logs
   force-link: false                    # Require linking before play
   alt-protection: true                 # Block alt accounts
 ```

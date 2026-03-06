@@ -23,6 +23,7 @@ import java.time.Instant;
  * - EmbedBuilder is reused conceptually (no extra objects beyond JDA's own).
  * - Data capture on main thread is a single volatile read per field.
  */
+@SuppressWarnings("null")
 public class LiveStatusModule extends CordModule {
 
     private boolean isRunning = false;

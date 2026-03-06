@@ -1,4 +1,4 @@
-﻿# ╔══════════════════════════════════════════════════════════════╗
+# ╔══════════════════════════════════════════════════════════════╗
 # ║  CordSync — English Language File                          ║
 # ║  This is the default language. All keys must exist here.   ║
 # ╚══════════════════════════════════════════════════════════════╝
@@ -181,7 +181,8 @@ discord:
   console-bridge-blocked: "🚫 This highly sensitive command is blocked for security reasons."
   console-bridge-title: "🖥️ Command Executed Successfully"
   console-bridge-field: "👤 Executed By"
-
+  console-bridge-footer: "CordSync • Console Bridge"
+  console-bridge-error: "❌ Error: {error}"
   disabled: "Discord bot integration is disabled."
   no-token: "Discord bot token is missing or invalid. Please configure it in config.yml."
   started: "✅ CordSync Discord Bot connected and operational."
@@ -194,6 +195,24 @@ discord:
   role-remove-error: "❌ Error while removing role: {error}"
   role-fail: "❌ Failed to remove role: {error}"
   luckperms-role-removed: "✅ Removed synced role {role} from {player}."
+  verified-console: "✅ {player} has been verified and linked."
+
+modules:
+  enabled: "📦 Enabled module: {module}"
+  skipped: "📦 Module skipped (Disabled in config): {module}"
+  unknown-command: "Unknown command. Type \"/help\" for help."
+
+commands:
+  help-title: "&b--- CordSync Commands ---"
+  help-link: "&f/link - Generate a linking code"
+  help-unlink: "&f/unlink - Unlink your account"
+  help-report: "&f/report <player> <reason> - Report a player"
+  help-bug: "&f/bug <desc> - Report a bug"
+  help-ticket: "&f/ticket - Open a support ticket"
+  help-staffchat: "&f/staffchat <msg> - Staff cross-server chat"
+  help-admin-info: "&7/csinfo - Show plugin info"
+  help-admin-reload: "&7/csreload - Reload configs"
+  help-admin-reverify: "&7/csreverify - Force smart reverification"
 
 join-quit:
   join-author: "⬆️ {role}{player} joined the server"
@@ -222,6 +241,7 @@ security:
   2fa-login-pending: "&c&l⚠ 2FA Verification Required\n\n&fA secure login request has been sent to your Discord DM.\n&7Please approve it to establish a connection to the server.\n\n&8Protected by CordSync"
   2fa-approved: "&8[&a&l✓&8] &fSecure login approved via Discord 2FA."
   2fa-denied: "&8[&c&l✗&8] &fLogin attempt explicitly denied. If this wasn't you, alert an administrator immediately."
+  2fa-expired-discord: "⏰ This request has expired."
 
 reverify:
   start: "&8[&a&l✓&8] &aSmart reverification process initiated."

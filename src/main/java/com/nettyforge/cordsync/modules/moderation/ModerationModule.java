@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("null")
 public class ModerationModule extends CordModule implements Listener {
 
     private boolean isRunning = false;

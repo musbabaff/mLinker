@@ -86,7 +86,8 @@ The developer's best friend. Track backend errors and control server crashing ev
 | Automation Feature | Security Bypass | Description |
 | :--- | :--- | :--- |
 | **TPS Watchdog** | *Async Cooldowns* | Pings Discord Admins internally if TPS slips below critical marks. |
-| **Smart Console Filter** | Anti-Loop Guard | Captures core backend errors (`WARN`/`SEVERE`/`Exceptions`) and maps them to Discord cleanly. Filters out JDA OkHttp noise. |
+| **Log4j2 Console Bridge** | Rate Limit Batching | Hooks into Log4j2 recursively to capture *all* console output. Buffers and flushes smartly every 1.5s to bypass Discord 2000-char limits. Filters out JDA OkHttp noise. |
+| **Two-Way Dispatch** | Admin Role ID | Securely allows authorized Discord Admins to execute server console commands directly from the bridge channel. |
 | **Auto-Broadcaster** | -- | Synchronized messaging array blasting over Game Chat and Discord simultaneously! |
 
 **Key Configuration (`modules/devops/config.yml`):**

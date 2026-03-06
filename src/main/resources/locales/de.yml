@@ -181,7 +181,8 @@ discord:
   console-bridge-blocked: "🚫 Dieser Befehl ist aus Sicherheitsgründen blockiert."
   console-bridge-title: "🖥️ Befehl erfolgreich ausgeführt"
   console-bridge-field: "👤 Ausgeführt von"
-
+  console-bridge-footer: "CordSync • Console Bridge"
+  console-bridge-error: "❌ Fehler: {error}"
   disabled: "Discord Bot Integration ist deaktiviert."
   no-token: "Discord Bot Token fehlt oder ist ungültig. Bitte in der config.yml eintragen."
   started: "✅ CordSync Discord Bot verbunden und betriebsbereit."
@@ -194,6 +195,24 @@ discord:
   role-remove-error: "❌ Fehler beim Entfernen der Rolle: {error}"
   role-fail: "❌ Entfernen der Rolle fehlgeschlagen: {error}"
   luckperms-role-removed: "✅ Synchronisierte Rolle {role} von {player} entfernt."
+  verified-console: "✅ {player} wurde verifiziert und verknüpft."
+
+modules:
+  enabled: "📦 Modul aktiviert: {module}"
+  skipped: "📦 Modul übersprungen (In der Config deaktiviert): {module}"
+  unknown-command: "Unbekannter Befehl. Tippe \"/help\" für Hilfe."
+
+commands:
+  help-title: "&b--- CordSync Befehle ---"
+  help-link: "&f/link - Einen Verknüpfungscode generieren"
+  help-unlink: "&f/unlink - Kontoverknüpfung aufheben"
+  help-report: "&f/report <spieler> <grund> - Einen Spieler melden"
+  help-bug: "&f/bug <beschreibung> - Einen Fehler melden"
+  help-ticket: "&f/ticket - Ein Support-Ticket öffnen"
+  help-staffchat: "&f/staffchat <nachricht> - Serverübergreifender Team-Chat"
+  help-admin-info: "&7/csinfo - Plugin-Infos anzeigen"
+  help-admin-reload: "&7/csreload - Konfiguration neu laden"
+  help-admin-reverify: "&7/csreverify - Smarte Verifizierung erzwingen"
 
 join-quit:
   join-author: "⬆️ {role}{player} hat den Server betreten"

@@ -162,6 +162,10 @@ security:
     enabled: false
     # Approved session duration in minutes (player won't need to re-approve)
     session-duration: 60
+    # Timeout for responding to the 2FA DM request in seconds
+    request-timeout-seconds: 300
+    # Channel to log 2FA approvals, denials and timeouts
+    2fa-log-channel-id: ""
     # Censor IP addresses in Discord messages (shows first 2 octets only)
     censor-ip: true
 

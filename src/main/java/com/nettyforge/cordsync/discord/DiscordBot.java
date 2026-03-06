@@ -116,6 +116,14 @@ public class DiscordBot extends ListenerAdapter {
             statusTask = null;
         }
         if (jda != null) {
+            // Graceful Shutdown to prevent "zip file closed" exceptions
+            jda.shutdown();
+            try {
+                // Give JDA 2 seconds to gracefully close audio and WebSocket connections
+                Thread.sleep(2000);
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
+            }
             jda.shutdownNow();
             plugin.getLogger().info(MessageUtil.get("discord.bot-stopped"));
         }

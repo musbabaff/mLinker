@@ -181,7 +181,8 @@ discord:
   console-bridge-blocked: "🚫 出于安全原因，此高度敏感的命令已被阻止。"
   console-bridge-title: "🖥️ 命令执行成功"
   console-bridge-field: "👤 执行者"
-
+  console-bridge-footer: "CordSync • Console Bridge"
+  console-bridge-error: "❌ 错误: {error}"
   disabled: "Discord 机器人集成已被禁用。"
   no-token: "Discord 机器人令牌缺失或无效。请在 config.yml 中配置它。"
   started: "✅ CordSync Discord 机器人已连接并运行正常。"
@@ -194,6 +195,24 @@ discord:
   role-remove-error: "❌ 移除角色时出错：{error}"
   role-fail: "❌ 无法移除角色：{error}"
   luckperms-role-removed: "✅ 移除玩家 {player} 同步的角色 {role}。"
+  verified-console: "✅ {player} 已被验证并绑定。"
+
+modules:
+  enabled: "📦 已启用的模块: {module}"
+  skipped: "📦 已跳过的模块 (在配置中禁用): {module}"
+  unknown-command: "未知命令。输入 \"/help\" 查看帮助。"
+
+commands:
+  help-title: "&b--- CordSync 命令 ---"
+  help-link: "&f/link - 生成绑定代码"
+  help-unlink: "&f/unlink - 解除账户绑定"
+  help-report: "&f/report <玩家> <原因> - 举报玩家"
+  help-bug: "&f/bug <描述> - 报告错误"
+  help-ticket: "&f/ticket - 提交支持票"
+  help-staffchat: "&f/staffchat <消息> - 跨服务器管理员聊天"
+  help-admin-info: "&7/csinfo - 显示插件信息"
+  help-admin-reload: "&7/csreload - 重新加载配置"
+  help-admin-reverify: "&7/csreverify - 强制进行智能重新验证"
 
 join-quit:
   join-author: "⬆️ {role}{player} 加入了服务器"

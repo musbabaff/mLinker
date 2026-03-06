@@ -210,6 +210,7 @@ public class TPSMonitor implements Runnable {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     private static Object getSparkDuration(String name) {
         try {
             Class<?> windowClass = Class.forName("me.lucko.spark.api.statistic.StatisticWindow$TicksPerSecond");

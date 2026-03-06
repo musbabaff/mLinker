@@ -227,6 +227,10 @@ public class CordSync extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // SPARK OPTIMIZATION: Kill ALL remaining Bukkit tasks to prevent zombie threads first!
+        // This stops ConsoleBridge timers and other tasks before JDA drops connection.
+        Bukkit.getScheduler().cancelTasks(this);
+
         if (discordBot != null) {
             discordBot.shutdown();
             getLogger().info(MessageUtil.get("discord.bot-stopped"));
@@ -255,10 +259,6 @@ public class CordSync extends JavaPlugin {
         if (moduleLoader != null) {
             moduleLoader.unloadModules();
         }
-
-        // SPARK OPTIMIZATION: Kill ALL remaining Bukkit tasks to prevent zombie threads
-        // on /reload
-        Bukkit.getScheduler().cancelTasks(this);
 
         // Unregister all event listeners owned by this plugin
         org.bukkit.event.HandlerList.unregisterAll(this);

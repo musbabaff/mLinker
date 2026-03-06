@@ -40,6 +40,33 @@ public class LinkCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
+        if (args.length > 0 && (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("yardim"))) {
+            player.sendMessage(MessageUtil.get("commands.help-title"));
+            player.sendMessage(MessageUtil.get("commands.help-link"));
+            player.sendMessage(MessageUtil.get("commands.help-unlink"));
+            
+            for (com.nettyforge.cordsync.modules.CordModule mod : plugin.getModuleLoader().getActiveModules()) {
+                String modName = mod.getName().toLowerCase();
+                if (modName.contains("report")) {
+                    player.sendMessage(MessageUtil.get("commands.help-report"));
+                    player.sendMessage(MessageUtil.get("commands.help-bug"));
+                } else if (modName.contains("ticket")) {
+                    player.sendMessage(MessageUtil.get("commands.help-ticket"));
+                } else if (modName.contains("network")) {
+                    if (player.hasPermission("cordsync.staffchat")) {
+                        player.sendMessage(MessageUtil.get("commands.help-staffchat"));
+                    }
+                }
+            }
+            
+            if (player.hasPermission("cordsync.admin")) {
+                player.sendMessage(MessageUtil.get("commands.help-admin-info"));
+                player.sendMessage(MessageUtil.get("commands.help-admin-reload"));
+                player.sendMessage(MessageUtil.get("commands.help-admin-reverify"));
+            }
+            return true;
+        }
+
         // Oyuncu zaten eÅŸleÅŸtirilmiÅŸ mi?
         if (storage.isPlayerLinked(player.getUniqueId())) {
             player.sendMessage(MessageUtil.get("link.already-linked"));

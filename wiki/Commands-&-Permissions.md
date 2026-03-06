@@ -8,10 +8,11 @@ Complete reference for all CordSync commands, aliases, and permissions.
 
 | Command | Aliases | Description | Permission | Default |
 |---|---|---|---|---|
-| `/link` | `/hesapesle`, `/mlink`, `/cslink` | Open the account linking GUI or start the linking process | `cordsync.use` | ✅ All |
-| `/unlink` | `/hesapkaldir`, `/munlink`, `/csunlink` | Remove the link between your Minecraft and Discord accounts | `cordsync.use` | ✅ All |
+| `/link` | `/hesapesle`, `/cslink` | Start the linking process or open the GUI | `cordsync.use` | ✅ All |
+| `/link help` | `/link yardim` | Dynamically list available commands for active modules | `cordsync.use` | ✅ All |
+| `/unlink` | `/hesapkaldir`, `/csunlink` | Remove the link between your Minecraft and Discord | `cordsync.use` | ✅ All |
 | `/report <player> <reason>` | — | Report a player to Discord admins with interactive buttons | — | ✅ All |
-| `/bug <description>` | `/bugreport`, `/hata` | Submit a technical bug report (includes TPS, RAM, coordinates) | `cordsync.bug` | ✅ All |
+| `/bug <description>` | `/bugreport`, `/hata` | Submit a technical bug report (includes TPS, RAM, coords) | `cordsync.bug` | ✅ All |
 | `/ticket create <message>` | `/destek`, `/csticket` | Open a two-way support ticket with Discord staff | `cordsync.ticket` | ✅ All |
 
 ---

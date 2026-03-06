@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,11 @@ public class ModuleLoader {
 
     private final CordSync plugin;
     private final Set<CordModule> activeModules = new HashSet<>();
+
+    public Set<CordModule> getActiveModules() {
+        return activeModules;
+    }
+
     private File modulesFile;
     private FileConfiguration modulesConfig;
 
@@ -47,9 +53,36 @@ public class ModuleLoader {
         if (shouldEnable) {
             module.setEnabled(true);
             activeModules.add(module);
-            plugin.getLogger().info("📦 Enabled module: " + module.getName());
+            plugin.getLogger().info(com.nettyforge.cordsync.utils.MessageUtil.getRaw("modules.enabled").replace("{module}", module.getName()));
         } else {
-            plugin.debug("📦 Module skipped (Disabled in config): " + module.getName());
+            plugin.debug(com.nettyforge.cordsync.utils.MessageUtil.getRaw("modules.skipped").replace("{module}", module.getName()));
+            hideCommandsForModule(module);
+        }
+    }
+
+    private void hideCommandsForModule(CordModule module) {
+        String name = module.getName().toLowerCase();
+        if (name.contains("report")) {
+            hideCommand("report");
+            hideCommand("bug");
+        } else if (name.contains("ticket")) {
+            hideCommand("ticket");
+        } else if (name.contains("network")) {
+            hideCommand("staffchat");
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void hideCommand(String cmdName) {
+        org.bukkit.command.PluginCommand cmd = plugin.getCommand(cmdName);
+        if (cmd != null) {
+            cmd.setPermission("cordsync.module.disabled");
+            cmd.setPermissionMessage(com.nettyforge.cordsync.utils.MessageUtil.get("modules.unknown-command"));
+            cmd.setTabCompleter((sender, command, alias, args) -> Collections.emptyList());
+            cmd.setExecutor((sender, command, label, args) -> {
+                sender.sendMessage(com.nettyforge.cordsync.utils.MessageUtil.get("modules.unknown-command"));
+                return true;
+            });
         }
     }
 

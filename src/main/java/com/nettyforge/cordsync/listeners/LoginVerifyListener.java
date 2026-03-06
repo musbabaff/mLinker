@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 import com.nettyforge.cordsync.CordSync;
@@ -85,26 +84,7 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
                 MessageUtil.get("security.2fa-login-pending"));
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        if (!plugin.getConfig().getBoolean("security.2fa-login.enabled", false))
-            return;
-
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        StorageProvider storage = plugin.getStorageProvider();
-
-        if (!storage.isPlayerLinked(uuid))
-            return;
-
-        String currentIp = "";
-        if (player.getAddress() != null) {
-            currentIp = player.getAddress().getAddress().getHostAddress();
-        }
-
-        // Log the join
-        sendJoinLog(player.getName(), storage.getDiscordId(uuid), currentIp, true);
-    }
+    // Note: onPlayerJoin and sendJoinLog removed to satisfy log channel isolation.
 
     // ===================================================================
     // DISCORD: Button Interaction for 2FA
@@ -116,6 +96,8 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
         // Approve login
         if (buttonId.startsWith("cordsync_2fa_approve_")) {
+            event.deferEdit().queue();
+            
             String uuidStr = buttonId.replace("cordsync_2fa_approve_", "");
             UUID uuid;
             try {
@@ -126,13 +108,13 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
             PendingLogin pending = pendingLogins.remove(uuid);
             if (pending == null) {
-                event.reply("⏰ This request has expired.").setEphemeral(true).queue();
+                event.getHook().sendMessage(MessageUtil.getRaw("security.2fa-expired-discord")).setEphemeral(true).queue();
                 return;
             }
 
             // Verify it's the correct Discord user
             if (!event.getUser().getId().equals(pending.discordId)) {
-                event.reply("❌ This request is not for you!").setEphemeral(true).queue();
+                event.getHook().sendMessage("❌ This request is not for you!").setEphemeral(true).queue();
                 pendingLogins.put(uuid, pending);
                 return;
             }
@@ -147,16 +129,16 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
                     20L * 60 * sessionMinutes);
 
             EmbedBuilder embed = new EmbedBuilder()
-
                     .setDescription(
-                            "You approved the login for **" + pending.playerName + "**.\nThey can now join the server.")
+                            "✅ You approved the login for **" + pending.playerName + "**.\nThey can now join the server.")
                     .addField("🌐 IP Address", censorIp(pending.ipAddress), true)
                     .addField("⏰ Session", sessionMinutes + " minutes", true)
                     .setColor(java.awt.Color.decode("#2B2D31"))
                     .setFooter("CordSync • 2FA Login")
                     .setTimestamp(Instant.now());
 
-            event.replyEmbeds(embed.build()).setEphemeral(true).queue();
+            event.getHook().sendMessageEmbeds(embed.build()).setEphemeral(true).queue();
+            send2FALog(pending.playerName, pending.ipAddress, pending.discordId, "✅ Approved");
 
             plugin.getLogger()
                     .info("✅ 2FA approved for " + pending.playerName + " from " + censorIp(pending.ipAddress));
@@ -165,6 +147,8 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
         // Deny login
         if (buttonId.startsWith("cordsync_2fa_deny_")) {
+            event.deferEdit().queue();
+            
             String uuidStr = buttonId.replace("cordsync_2fa_deny_", "");
             UUID uuid;
             try {
@@ -175,26 +159,26 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
             PendingLogin pending = pendingLogins.remove(uuid);
             if (pending == null) {
-                event.reply("⏰ This request has expired.").setEphemeral(true).queue();
+                event.getHook().sendMessage(MessageUtil.getRaw("security.2fa-expired-discord")).setEphemeral(true).queue();
                 return;
             }
 
             if (!event.getUser().getId().equals(pending.discordId)) {
-                event.reply("❌ This request is not for you!").setEphemeral(true).queue();
+                event.getHook().sendMessage("❌ This request is not for you!").setEphemeral(true).queue();
                 pendingLogins.put(uuid, pending);
                 return;
             }
 
             EmbedBuilder embed = new EmbedBuilder()
-
                     .setDescription("### 🚫 Login Denied\n\nLogin attempt for **" + pending.playerName
                             + "** was denied.\n⚠️ If this wasn't you, your account may be compromised!")
                     .addField("🌐 IP Address", censorIp(pending.ipAddress), true)
-                    .setColor(java.awt.Color.decode("#2B2D31"))
+                    .setColor(java.awt.Color.decode("#F04747"))
                     .setFooter("CordSync • 2FA Login")
                     .setTimestamp(Instant.now());
 
-            event.replyEmbeds(embed.build()).setEphemeral(true).queue();
+            event.getHook().sendMessageEmbeds(embed.build()).setEphemeral(true).queue();
+            send2FALog(pending.playerName, pending.ipAddress, pending.discordId, "🚫 Denied");
 
             plugin.getLogger()
                     .warning("🚫 2FA denied for " + pending.playerName + " from " + censorIp(pending.ipAddress));
@@ -241,34 +225,48 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
             plugin.getLogger().warning("⚠ 2FA request failed: " + throwable.getMessage());
         });
 
-        // Auto-expire after 5 minutes (300 seconds = 6000 ticks)
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin,
-                () -> pendingLogins.remove(uuid), 20L * 300);
+        // Configurable Timeout
+        long timeoutSeconds = plugin.getConfig().getLong("security.2fa-login.request-timeout-seconds", 300);
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+            PendingLogin pending = pendingLogins.remove(uuid);
+            if (pending != null) {
+                send2FALog(pending.playerName, pending.ipAddress, pending.discordId, "⏳ Timeout");
+            }
+        }, 20L * timeoutSeconds);
     }
 
-    // ===================================================================
-    // LOG: Join/Leave embeds
-    // ===================================================================
-
-    public void sendJoinLog(String playerName, String discordId, String ip, boolean joined) {
-        if (plugin.getDiscordBot() == null)
+    private void send2FALog(String playerName, String ipAddress, String discordId, String status) {
+        if (plugin.getDiscordBot() == null || plugin.getDiscordBot().getJda() == null)
             return;
 
-        boolean is2fa = plugin.getConfig().getBoolean("security.2fa-login.enabled", false);
-        String title = joined ? "🟢 A player has joined the server" : "🔴 A player has left the server";
+        String logChannelId = plugin.getConfig().getString("security.2fa-login.2fa-log-channel-id", "");
+        if (logChannelId == null || logChannelId.isEmpty())
+            return;
+
+        java.awt.Color color = java.awt.Color.decode("#FAA61A");
+        if (status.contains("Approved")) {
+            color = java.awt.Color.decode("#43B581");
+        } else if (status.contains("Denied")) {
+            color = java.awt.Color.decode("#F04747");
+        }
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setDescription("### " + title)
-                .setColor(java.awt.Color.decode("#2B2D31"))
-                .addField("👤 Username", playerName, true)
-                .addField("🔐 2FA", is2fa ? "✅ Enabled" : "❌ Disabled", true)
-                .addField("💬 Discord", discordId != null ? "<@" + discordId + ">" : "Not Linked", true)
-                .addField("🌐 IP Address", censorIp(ip), true)
+                .setDescription("### 🛡️ 2FA Security Log")
+                .setColor(color)
+                .addField("👤 Player", playerName, true)
+                .addField("🌐 IP Address", censorIp(ipAddress), true)
+                .addField("💬 Discord", discordId != null ? "<@" + discordId + ">" : "Unknown", true)
+                .addField("📊 Status", status, true)
                 .addField("📅 Date", "<t:" + Instant.now().getEpochSecond() + ":F>", true)
-                .setFooter("CordSync • Server Logs")
+                .setFooter("CordSync • Security")
                 .setTimestamp(Instant.now());
 
-        plugin.getDiscordBot().sendLogEmbed(null, null, null, embed);
+        try {
+            net.dv8tion.jda.api.entities.channel.concrete.TextChannel tc = plugin.getDiscordBot().getJda().getTextChannelById(logChannelId);
+            if (tc != null) {
+                tc.sendMessageEmbeds(embed.build()).queue();
+            }
+        } catch (Exception ignored) { }
     }
 
     // ===================================================================

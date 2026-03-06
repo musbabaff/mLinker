@@ -39,16 +39,16 @@ public class JoinQuitListener implements Listener {
         UUID uuid = player.getUniqueId();
         StorageProvider storage = plugin.getStorageProvider();
 
-        if (!storage.isPlayerLinked(uuid))
-            return;
-
-        String discordId = storage.getDiscordId(uuid);
-        if (discordId == null)
-            return;
+        boolean isLinked = storage.isPlayerLinked(uuid);
+        String discordId = isLinked ? storage.getDiscordId(uuid) : null;
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             String skinUrl = "https://mc-heads.net/avatar/" + uuid + "/128";
-            String roleName = getHighestRole(discordId);
+            
+            String roleName = null;
+            if (isLinked && discordId != null) {
+                roleName = getHighestRole(discordId);
+            }
             String rolePrefix = roleName != null ? "[" + roleName + "] " : "";
             int online = Bukkit.getOnlinePlayers().size();
 
@@ -60,9 +60,15 @@ public class JoinQuitListener implements Listener {
                     .setAuthor(authorText, null, skinUrl)
                     .setColor(java.awt.Color.decode("#2B2D31"))
                     .setThumbnail(skinUrl)
-                    .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true)
-                    .addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true)
-                    .addField(MessageUtil.getRaw("join-quit.field-online"), String.valueOf(online), true)
+                    .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true);
+                    
+            if (isLinked && discordId != null) {
+                embed.addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true);
+            } else {
+                embed.addField(MessageUtil.getRaw("join-quit.field-discord"), "Not Linked", true);
+            }
+            
+            embed.addField(MessageUtil.getRaw("join-quit.field-online"), String.valueOf(online), true)
                     .setFooter("CordSync • Join/Quit")
                     .setTimestamp(Instant.now());
 
@@ -89,16 +95,16 @@ public class JoinQuitListener implements Listener {
         UUID uuid = player.getUniqueId();
         StorageProvider storage = plugin.getStorageProvider();
 
-        if (!storage.isPlayerLinked(uuid))
-            return;
-
-        String discordId = storage.getDiscordId(uuid);
-        if (discordId == null)
-            return;
+        boolean isLinked = storage.isPlayerLinked(uuid);
+        String discordId = isLinked ? storage.getDiscordId(uuid) : null;
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             String skinUrl = "https://mc-heads.net/avatar/" + uuid + "/128";
-            String roleName = getHighestRole(discordId);
+            
+            String roleName = null;
+            if (isLinked && discordId != null) {
+                roleName = getHighestRole(discordId);
+            }
             String rolePrefix = roleName != null ? "[" + roleName + "] " : "";
             int online = Bukkit.getOnlinePlayers().size() - 1;
 
@@ -110,9 +116,15 @@ public class JoinQuitListener implements Listener {
                     .setAuthor(authorText, null, skinUrl)
                     .setColor(java.awt.Color.decode("#2B2D31"))
                     .setThumbnail(skinUrl)
-                    .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true)
-                    .addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true)
-                    .addField(MessageUtil.getRaw("join-quit.field-online"), String.valueOf(Math.max(0, online)), true)
+                    .addField(MessageUtil.getRaw("join-quit.field-player"), player.getName(), true);
+                    
+            if (isLinked && discordId != null) {
+                embed.addField(MessageUtil.getRaw("join-quit.field-discord"), "<@" + discordId + ">", true);
+            } else {
+                embed.addField(MessageUtil.getRaw("join-quit.field-discord"), "Not Linked", true);
+            }
+            
+            embed.addField(MessageUtil.getRaw("join-quit.field-online"), String.valueOf(Math.max(0, online)), true)
                     .setFooter("CordSync • Join/Quit")
                     .setTimestamp(Instant.now());
 
