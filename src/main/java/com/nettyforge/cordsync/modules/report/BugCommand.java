@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-@SuppressWarnings("null")
 public class BugCommand implements CommandExecutor {
 
     private final CordSync plugin;

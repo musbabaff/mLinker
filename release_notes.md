@@ -1,3 +1,9 @@
+# 🚀 CordSync v1.4.4 — Code Quality Polish
+
+Minor code quality improvement — removed an unnecessary `@SuppressWarnings("unchecked")` annotation from `TPSMonitor.java` flagged by the IDE.
+
+---
+
 # 🚀 CordSync v1.4.3 — Critical Locale Structure Fix
 
 This hotfix resolves the **Missing message key: discord.log-linked** error that appeared in Discord log embeds after account linking.
