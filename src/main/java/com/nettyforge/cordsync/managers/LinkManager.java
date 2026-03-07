@@ -9,11 +9,11 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.utils.CodeUtil;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 public class LinkManager {
 
@@ -77,32 +77,27 @@ public class LinkManager {
     }
 
     private void startCleanupTask() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                long now = System.currentTimeMillis();
-                List<UUID> expired = new ArrayList<>();
+        SchedulerUtil.runAsyncTimer(CordSync.getInstance(), () -> {
+            long now = System.currentTimeMillis();
+            List<UUID> expired = new ArrayList<>();
 
-                for (Map.Entry<UUID, Long> entry : expiryTimes.entrySet()) {
-                    if (entry.getValue() <= now) {
-                        expired.add(entry.getKey());
-                    }
-                }
-
-                for (UUID id : expired) {
-                    expiryTimes.remove(id);
-                    removeCodeByUUID(id);
-
-                    OfflinePlayer offline = Bukkit.getOfflinePlayer(id);
-                    Player player = offline.getPlayer();
-
-                    if (player != null && player.isOnline()) {
-                        player.sendMessage(MessageUtil.get("link.code-expired"));
-                    }
+            for (Map.Entry<UUID, Long> entry : expiryTimes.entrySet()) {
+                if (entry.getValue() <= now) {
+                    expired.add(entry.getKey());
                 }
             }
-        }.runTaskTimerAsynchronously(CordSync.getInstance(), 20L * 30L, 20L * 60L);
+
+            for (UUID id : expired) {
+                expiryTimes.remove(id);
+                removeCodeByUUID(id);
+
+                OfflinePlayer offline = Bukkit.getOfflinePlayer(id);
+                Player player = offline.getPlayer();
+
+                if (player != null && player.isOnline()) {
+                    player.sendMessage(MessageUtil.get("link.code-expired"));
+                }
+            }
+        }, 20L * 30L, 20L * 60L);
     }
 }
-
-

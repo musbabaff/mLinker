@@ -1,3 +1,26 @@
+# 🚀 CordSync v1.5.0 — Folia Native Compatibility
+
+**Major architectural overhaul** — CordSync is now 100% compatible with **Folia** (Paper's multithreaded fork) while maintaining full backward compatibility with Spigot/Paper.
+
+### 🏗️ Universal Scheduler Architecture
+- **New `SchedulerUtil` abstraction layer** with runtime Folia detection via reflection
+- **Zero compile-time Folia dependency** — all Folia APIs called via reflection
+- On Folia: routes sync tasks to `GlobalRegionScheduler`, async tasks to `AsyncScheduler`
+- On Bukkit/Paper: routes to classic `BukkitScheduler` as before
+
+### 🔧 Project-Wide Refactoring
+- **37+ direct `Bukkit.getScheduler()` calls replaced** across 21 files
+- **`BukkitRunnable` eliminated** — replaced with `SchedulerUtil.runAsyncTimer()`
+- Graceful task cancellation via `SchedulerUtil.cancelAll()` on plugin disable
+- All deprecated scheduler aliases updated to canonical method names
+
+### ✅ Verified
+- Zero remaining `Bukkit.getScheduler()` calls outside the abstraction layer
+- Zero remaining `BukkitRunnable` usages
+- Clean Maven build (exit code 0)
+
+---
+
 # 🚀 CordSync v1.4.4 — Code Quality Polish
 
 Minor code quality improvement — removed an unnecessary `@SuppressWarnings("unchecked")` annotation from `TPSMonitor.java` flagged by the IDE.

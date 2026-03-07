@@ -27,6 +27,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
+import com.nettyforge.cordsync.utils.SchedulerUtil;
+
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.rewards.RewardLogManager;
 import com.nettyforge.cordsync.storage.StorageProvider;
@@ -119,7 +121,7 @@ public class RewardManager {
             return;
         }
 
-        intervalTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        SchedulerUtil.runSyncTimer(plugin, () -> {
             long now = System.currentTimeMillis();
             for (Player p : Bukkit.getOnlinePlayers()) {
                 tryGrantInterval(p, now);
@@ -152,7 +154,7 @@ public class RewardManager {
             return;
         }
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             try {
 
                 if (data.getBoolean("first-claimed." + uuid, false)) {
@@ -221,7 +223,7 @@ public class RewardManager {
                 continue;
             String cmd = raw.replace("{player}", player.getName());
 
-            Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd));
+            SchedulerUtil.runSync(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd));
         }
     }
 

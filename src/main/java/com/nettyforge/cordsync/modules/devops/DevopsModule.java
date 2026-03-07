@@ -85,7 +85,7 @@ public class DevopsModule extends CordModule {
     // Feature 1: TPS Watchdog & Crash Alarm
     // ==========================================
     private void startTPSWatchdog() {
-        SchedulerUtil.runTimerAsync(plugin, () -> {
+        SchedulerUtil.runAsyncTimer(plugin, () -> {
             if (!isRunning)
                 return;
 
@@ -137,7 +137,7 @@ public class DevopsModule extends CordModule {
     private void startAutoBroadcaster() {
         long intervalSec = getConfig().getLong("broadcaster.interval-seconds", 600);
 
-        SchedulerUtil.runTimerAsync(plugin, () -> {
+        SchedulerUtil.runAsyncTimer(plugin, () -> {
             if (!isRunning)
                 return;
 
@@ -150,7 +150,7 @@ public class DevopsModule extends CordModule {
 
             // Send to Game
             String gameMessage = org.bukkit.ChatColor.translateAlternateColorCodes('&', message);
-            Bukkit.getScheduler().runTask(plugin, () -> Bukkit.broadcastMessage(gameMessage));
+            SchedulerUtil.runSync(plugin, () -> Bukkit.broadcastMessage(gameMessage));
 
             // Send to Discord
             if (plugin.getDiscordBot() != null && plugin.getDiscordBot().getJda() != null) {

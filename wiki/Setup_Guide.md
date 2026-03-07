@@ -103,7 +103,7 @@ Each enabled module creates its own config at `plugins/CordSync/modules/<module>
 | |__| (_) | | | (_| | ___) || |_| | | | | (__
  \____\___/|_|  \__,_||____/ \__, |_| |_|\___|
                               |___/
-                               v1.4.0
+                               v1.4.4
 
 ✅ Discord bot connected!
 ✅ /link slash command registered!
@@ -143,7 +143,7 @@ discord:
 | "Please set the channel-id" warnings | Update the relevant module config with actual Discord channel IDs. |
 | Leaderboard shows "No data" | Ensure `ajLeaderboards` or `PlaceholderAPI` is installed. |
 | Voice module won't start | Install `WorldGuard` — it's a required soft-dependency for this module. |
-| 2FA always says "Expired" | This was fixed in v1.4.0. Make sure you're running the latest version. |
+| 2FA always says "Expired" | This was fixed in v1.4.4. Make sure you're running the latest version. |
 
 ---
 

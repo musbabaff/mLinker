@@ -51,7 +51,7 @@ public class RewardsModule extends CordModule {
 
     private void startVoiceTracker() {
         // Runs every 1 minute (1200 ticks = 60 seconds)
-        SchedulerUtil.runTimerAsync(plugin, () -> {
+        SchedulerUtil.runAsyncTimer(plugin, () -> {
             if (!isRunning)
                 return;
             if (plugin.getDiscordBot() == null || plugin.getDiscordBot().getJda() == null)
@@ -115,7 +115,7 @@ public class RewardsModule extends CordModule {
                 "🎉 Congratulations! You received in-game rewards for hanging out in our Discord Voice Channels!");
 
         // Run commands on primary Bukkit thread
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             for (String cmd : commands) {
                 String finalCmd = cmd.replace("%player%", playerName);
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCmd);

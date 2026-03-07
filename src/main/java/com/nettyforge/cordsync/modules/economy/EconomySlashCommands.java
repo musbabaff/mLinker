@@ -64,7 +64,7 @@ public class EconomySlashCommands extends ListenerAdapter {
         String targetName = java.util.Objects.requireNonNull(event.getOption("player")).getAsString();
         event.deferReply().queue(); // Because Bukkit operations can take time async
 
-        SchedulerUtil.runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             @SuppressWarnings("deprecation")
             OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
 
@@ -105,7 +105,7 @@ public class EconomySlashCommands extends ListenerAdapter {
         String targetName = java.util.Objects.requireNonNull(event.getOption("player")).getAsString();
         event.deferReply().queue();
 
-        SchedulerUtil.runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             @SuppressWarnings("deprecation")
             OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
 
@@ -157,7 +157,7 @@ public class EconomySlashCommands extends ListenerAdapter {
         int amount = java.util.Objects.requireNonNull(event.getOption("amount")).getAsInt();
         event.deferReply().queue();
 
-        SchedulerUtil.runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             @SuppressWarnings("deprecation")
             OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
 

@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -75,7 +76,7 @@ public class ConsoleBridgeListener extends ListenerAdapter {
         log4jFilter.start();
         coreLogger.addFilter(log4jFilter);
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsyncTimer(plugin, () -> {
             try {
                 if (!running || messageQueue.isEmpty())
                     return;
@@ -150,7 +151,7 @@ public class ConsoleBridgeListener extends ListenerAdapter {
             }
         }
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             try {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 

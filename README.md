@@ -4,7 +4,7 @@
 
 ### The Ultimate Discord ↔ Minecraft Synchronization Core
 
-[![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](https://github.com/musbabaff/CordSync/releases)
+[![Version](https://img.shields.io/badge/version-1.4.4-blue.svg)](https://github.com/musbabaff/CordSync/releases)
 [![License](https://img.shields.io/badge/license-Custom%20EULA-red.svg)](LICENSE)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.8--1.21+-brightgreen.svg)](https://papermc.io)
 [![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://adoptium.net/)
@@ -148,7 +148,7 @@ onDisable()          → cancelTasks + unregisterAll ✓
 
 ### Installation
 
-1. Download `CordSync-1.4.0.jar` from [Releases](https://github.com/musbabaff/CordSync/releases)
+1. Download `CordSync-1.4.4.jar` from [Releases](https://github.com/musbabaff/CordSync/releases)
 2. Place it in your server's `plugins/` folder
 3. Start the server once to generate config files
 4. Edit `plugins/CordSync/config.yml` — add your **Bot Token** and **Guild ID**
@@ -210,6 +210,6 @@ CordSync uses [bStats](https://bstats.org/) for anonymous usage statistics. You 
 
 **Built with ❤️ by [NettyForge Studios](https://nettyforge.com)**
 
-*CordSync v1.4.0 — The Ultimate Discord-Minecraft Synchronization Core*
+*CordSync v1.4.4 — The Ultimate Discord-Minecraft Synchronization Core*
 
 </div>

@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.storage.StorageProvider;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -124,7 +125,7 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
             // Auto-expire session after configured time
             long sessionMinutes = plugin.getConfig().getLong("security.2fa-login.session-duration", 60);
-            Bukkit.getScheduler().runTaskLaterAsynchronously(plugin,
+            SchedulerUtil.runAsyncLater(plugin,
                     () -> approvedSessions.remove(uuid),
                     20L * 60 * sessionMinutes);
 
@@ -227,7 +228,7 @@ public class LoginVerifyListener extends ListenerAdapter implements Listener {
 
         // Configurable Timeout
         long timeoutSeconds = plugin.getConfig().getLong("security.2fa-login.request-timeout-seconds", 300);
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsyncLater(plugin, () -> {
             PendingLogin pending = pendingLogins.remove(uuid);
             if (pending != null) {
                 send2FALog(pending.playerName, pending.ipAddress, pending.discordId, "⏳ Timeout");

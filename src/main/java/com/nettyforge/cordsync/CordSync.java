@@ -25,6 +25,7 @@ import com.nettyforge.cordsync.storage.StorageProvider;
 import com.nettyforge.cordsync.storage.YamlStorage;
 import com.nettyforge.cordsync.tasks.ReverifyTask;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 import com.nettyforge.cordsync.utils.UpdateChecker;
 import com.nettyforge.cordsync.modules.ModuleLoader;
 
@@ -229,7 +230,7 @@ public class CordSync extends JavaPlugin {
     public void onDisable() {
         // SPARK OPTIMIZATION: Kill ALL remaining Bukkit tasks to prevent zombie threads first!
         // This stops ConsoleBridge timers and other tasks before JDA drops connection.
-        Bukkit.getScheduler().cancelTasks(this);
+        SchedulerUtil.cancelAll(this);
 
         if (discordBot != null) {
             discordBot.shutdown();

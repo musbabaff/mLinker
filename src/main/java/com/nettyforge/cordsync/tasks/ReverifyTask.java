@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.storage.StorageProvider;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -15,7 +16,7 @@ import net.dv8tion.jda.api.entities.Member;
 public class ReverifyTask implements Runnable {
 
     private final CordSync plugin;
-    private int taskId = -1;
+    private boolean running = false;
 
     public ReverifyTask(CordSync plugin) {
         this.plugin = plugin;
@@ -26,14 +27,12 @@ public class ReverifyTask implements Runnable {
         if (interval <= 0)
             interval = 6;
         long ticks = interval * 60 * 60 * 20;
-        taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this, ticks, ticks);
+        running = true;
+        SchedulerUtil.runSyncTimer(plugin, this, ticks, ticks);
     }
 
     public void stop() {
-        if (taskId != -1) {
-            Bukkit.getScheduler().cancelTask(taskId);
-            taskId = -1;
-        }
+        running = false;
     }
 
     @Override

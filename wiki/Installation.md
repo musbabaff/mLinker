@@ -21,7 +21,7 @@ Installing **CordSync** is a fast and simple process. Follow the steps below to 
 9. Copy the generated URL and invite the bot to your Discord Server.
 
 ## 3. Installing the Plugin
-1. Download `CordSync-1.2.0.jar` from the GitHub Releases or directly from your build.
+1. Download `CordSync-1.4.4.jar` from the GitHub Releases or directly from your build.
 2. Place the JAR file in your server's `plugins/` folder.
 3. Start or restart your Minecraft server to generate the configuration files.
 4. Stop the server.

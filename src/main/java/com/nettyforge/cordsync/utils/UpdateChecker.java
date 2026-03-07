@@ -22,7 +22,7 @@ public class UpdateChecker {
     }
 
     public void checkForUpdates() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsync(plugin, () -> {
             plugin.debug("UpdateChecker: Fetching latest release from GitHub...");
             try {
                 String apiUrl = String.format(githubAPI, repoOwner, repoName);
@@ -70,7 +70,7 @@ public class UpdateChecker {
                     plugin.getLogger().info("§e----------------------------------------------------");
 
                     // Notify any online operators instantly (useful after /csreload)
-                    Bukkit.getScheduler().runTask(plugin, () -> {
+                    SchedulerUtil.runSync(plugin, () -> {
                         for (org.bukkit.entity.Player p : Bukkit.getOnlinePlayers()) {
                             if (p.isOp() || p.hasPermission("cordsync.admin")) {
                                 p.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&',

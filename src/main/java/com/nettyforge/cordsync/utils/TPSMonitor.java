@@ -38,7 +38,7 @@ public class TPSMonitor implements Runnable {
 
     public TPSMonitor(JavaPlugin plugin) {
         try {
-            Bukkit.getScheduler().runTaskTimer(plugin, this, 40L, 40L);
+            SchedulerUtil.runSyncTimer(plugin, this, 40L, 40L);
         } catch (Exception e) {
             // Folia fallback — graceful
         }

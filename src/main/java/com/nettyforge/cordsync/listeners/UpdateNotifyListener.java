@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.nettyforge.cordsync.CordSync;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 public class UpdateNotifyListener implements Listener {
 
@@ -20,7 +21,7 @@ public class UpdateNotifyListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (plugin.isUpdateAvailable() && (player.isOp() || player.hasPermission("cordsync.admin"))) {
-            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            SchedulerUtil.runSyncLater(plugin, () -> {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',
                         "&e----------------------------------------------------"));
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',

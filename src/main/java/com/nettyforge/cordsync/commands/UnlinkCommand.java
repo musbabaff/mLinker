@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.storage.StorageProvider;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -61,7 +62,7 @@ public class UnlinkCommand implements CommandExecutor {
         }
 
         // VeritabanÄ± ve Discord API iÅŸlemlerini tamamen Asenkron yapÄ±yoruz.
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsync(plugin, () -> {
 
             // 1. Unlink timestamp kaydet (suistimal korumasÄ±)
             storage.setUnlinkTimestamp(player.getUniqueId(), System.currentTimeMillis());
@@ -79,7 +80,7 @@ public class UnlinkCommand implements CommandExecutor {
             sendUnlinkLog(player.getName());
 
             // 5. Oyuncuya ve konsola mesaj gÃ¶nderme
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            SchedulerUtil.runSync(plugin, () -> {
                 if (player.isOnline()) {
                     player.sendMessage(MessageUtil.get("unlink.success"));
                 }

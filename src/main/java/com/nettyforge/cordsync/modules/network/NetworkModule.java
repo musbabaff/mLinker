@@ -2,6 +2,7 @@ package com.nettyforge.cordsync.modules.network;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.modules.CordModule;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -132,7 +133,7 @@ public class NetworkModule extends CordModule {
             String colored = ChatColor.translateAlternateColorCodes('&', format);
 
             // Dispatch to local online staff concurrently
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            SchedulerUtil.runSync(plugin, () -> {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     if (p.hasPermission("cordsync.staffchat")) {
                         p.sendMessage(colored);

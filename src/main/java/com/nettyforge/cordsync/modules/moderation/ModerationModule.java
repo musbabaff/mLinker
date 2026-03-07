@@ -228,7 +228,7 @@ public class ModerationModule extends CordModule implements Listener {
                     .replace("{duration}", duration);
 
             // Dispatch on Bukkit main thread
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            SchedulerUtil.runSync(plugin, () -> {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand);
             });
 

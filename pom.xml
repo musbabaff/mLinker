@@ -6,7 +6,7 @@
 
   <groupId>com.nettyforge</groupId>
   <artifactId>CordSync</artifactId>
-  <version>1.4.4</version>
+  <version>1.5.0</version>
   <name>CordSync</name>
   <description>Discord ↔ Minecraft account linking, verification and reward system.</description>
   <url>https://github.com/musbabaff/CordSync</url>

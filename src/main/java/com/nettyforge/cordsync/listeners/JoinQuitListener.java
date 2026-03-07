@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.storage.StorageProvider;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -42,7 +43,7 @@ public class JoinQuitListener implements Listener {
         boolean isLinked = storage.isPlayerLinked(uuid);
         String discordId = isLinked ? storage.getDiscordId(uuid) : null;
 
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsync(plugin, () -> {
             String skinUrl = "https://mc-heads.net/avatar/" + uuid + "/128";
             
             String roleName = null;
@@ -98,7 +99,7 @@ public class JoinQuitListener implements Listener {
         boolean isLinked = storage.isPlayerLinked(uuid);
         String discordId = isLinked ? storage.getDiscordId(uuid) : null;
 
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsync(plugin, () -> {
             String skinUrl = "https://mc-heads.net/avatar/" + uuid + "/128";
             
             String roleName = null;

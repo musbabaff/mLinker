@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.storage.StorageProvider;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
@@ -87,7 +88,7 @@ public class ReverseSyncListener extends ListenerAdapter {
     }
 
     private void addLuckPermsGroup(UUID uuid, String group) {
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             try {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                         "lp user " + uuid + " parent add " + group);
@@ -98,7 +99,7 @@ public class ReverseSyncListener extends ListenerAdapter {
     }
 
     private void removeLuckPermsGroup(UUID uuid, String group) {
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             try {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                         "lp user " + uuid + " parent remove " + group);

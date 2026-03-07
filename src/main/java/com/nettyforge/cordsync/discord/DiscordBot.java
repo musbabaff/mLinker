@@ -10,6 +10,7 @@ import com.nettyforge.cordsync.commands.LinkVerifyCommand;
 import com.nettyforge.cordsync.listeners.ConsoleBridgeListener;
 import com.nettyforge.cordsync.listeners.ReverseSyncListener;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -177,7 +178,7 @@ public class DiscordBot extends ListenerAdapter {
         String formatted = ChatColor.translateAlternateColorCodes('&',
                 format.replace("{player}", playerName).replace("{message}", rawMessage));
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage(formatted);
             }
@@ -221,7 +222,7 @@ public class DiscordBot extends ListenerAdapter {
         final List<String> finalMessages = messages;
         final AtomicInteger index = new AtomicInteger(0);
 
-        statusTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsyncTimer(plugin, () -> {
             if (jda == null || jda.getStatus() != JDA.Status.CONNECTED)
                 return;
 

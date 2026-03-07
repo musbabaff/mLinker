@@ -2,6 +2,7 @@ package com.nettyforge.cordsync.modules.report;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.modules.CordModule;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;
@@ -93,7 +94,7 @@ public class ReportModule extends CordModule {
             }
 
             // Execute teleport on Bukkit main thread
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            SchedulerUtil.runSync(plugin, () -> {
                 Player staff = Bukkit.getPlayer(staffUuid);
                 Player target = Bukkit.getPlayer(targetName);
 

@@ -110,7 +110,7 @@ public class SecurityModule extends CordModule implements Listener {
 
                 // Using Scheduler to safely access Bukkit API and perform Storage DB call if
                 // needed
-                SchedulerUtil.runTask(plugin, () -> {
+                SchedulerUtil.runSync(plugin, () -> {
                     plugin.getStorageProvider().removeLinkedAccount(playerUUID);
 
                     // If player is online, kick them

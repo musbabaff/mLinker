@@ -1,6 +1,6 @@
 name: CordSync
 main: com.nettyforge.cordsync.CordSync
-version: 1.4.4
+version: 1.5.0
 author: musbabaff (NettyForge Studios)
 website: https://nettyforge.com
 description: >

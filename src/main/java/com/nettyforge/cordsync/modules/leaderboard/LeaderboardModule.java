@@ -2,6 +2,7 @@ package com.nettyforge.cordsync.modules.leaderboard;
 
 import com.nettyforge.cordsync.CordSync;
 import com.nettyforge.cordsync.modules.CordModule;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.bukkit.Bukkit;
@@ -20,7 +21,6 @@ import java.util.*;
 public class LeaderboardModule extends CordModule {
 
     private boolean isRunning = false;
-    private final List<Integer> activeTaskIds = new ArrayList<>();
 
     // Cached availability flags
     private static Boolean ajlbAvailable = null;
@@ -84,13 +84,12 @@ public class LeaderboardModule extends CordModule {
             long intervalSeconds = board.getLong("update-interval", 600);
             long intervalTicks = intervalSeconds * 20L;
 
-            int taskId = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+            SchedulerUtil.runAsyncTimer(plugin, () -> {
                 if (!isRunning)
                     return;
                 updateBoard(boardKey, board);
-            }, 100L, intervalTicks).getTaskId();
+            }, 100L, intervalTicks);
 
-            activeTaskIds.add(taskId);
             plugin.getLogger().info("  📋 Board '" + boardKey + "' scheduled every " + intervalSeconds + "s");
         }
     }
@@ -98,10 +97,7 @@ public class LeaderboardModule extends CordModule {
     @Override
     public void onDisable() {
         isRunning = false;
-        for (int taskId : activeTaskIds) {
-            Bukkit.getScheduler().cancelTask(taskId);
-        }
-        activeTaskIds.clear();
+        // Tasks are cancelled via SchedulerUtil.cancelAll() in CordSync.onDisable()
         plugin.getLogger().info("🏆 Leaderboard Module Offline.");
     }
 

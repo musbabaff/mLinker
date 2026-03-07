@@ -20,6 +20,7 @@ import com.nettyforge.cordsync.managers.RewardManager;
 import com.nettyforge.cordsync.rewards.RewardLogManager;
 import com.nettyforge.cordsync.storage.StorageProvider;
 import com.nettyforge.cordsync.utils.MessageUtil;
+import com.nettyforge.cordsync.utils.SchedulerUtil;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -286,7 +287,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
                 .queue();
 
         // Auto-expire after 60 seconds
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+        SchedulerUtil.runAsyncLater(plugin, () -> {
             pendingConfirmations.remove(confirmId);
         }, 20L * 60);
     }
@@ -390,7 +391,7 @@ public class LinkVerifyCommand extends ListenerAdapter {
         final UUID uuid = pending.uuid;
         final boolean isBoosting = event.getMember() != null && event.getMember().isBoosting();
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.runSync(plugin, () -> {
             Player player = Bukkit.getPlayer(uuid);
             if (player != null && player.isOnline()) {
                 player.sendMessage(MessageUtil.format("link.success", Map.of("player", playerName)));
