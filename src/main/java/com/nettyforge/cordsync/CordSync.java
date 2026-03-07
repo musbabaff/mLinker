@@ -152,6 +152,13 @@ public class CordSync extends JavaPlugin {
 
         registerCommands();
 
+        // Register 2FA login listener BEFORE Discord bot so JDA can add it
+        if (config.getBoolean("security.2fa-login.enabled", false)) {
+            loginVerifyListener = new com.nettyforge.cordsync.listeners.LoginVerifyListener(this);
+            Bukkit.getPluginManager().registerEvents(loginVerifyListener, this);
+            getLogger().info("2FA Login system enabled.");
+        }
+
         initializeDiscordBot(config);
 
         // Register chat bridge listener
@@ -159,13 +166,6 @@ public class CordSync extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(
                     new com.nettyforge.cordsync.listeners.ChatBridgeListener(this), this);
             getLogger().info("💬 Chat bridge enabled.");
-        }
-
-        // Register 2FA login listener (SINGLE INSTANCE for both Bukkit + JDA)
-        if (config.getBoolean("security.2fa-login.enabled", false)) {
-            loginVerifyListener = new com.nettyforge.cordsync.listeners.LoginVerifyListener(this);
-            Bukkit.getPluginManager().registerEvents(loginVerifyListener, this);
-            getLogger().info("2FA Login system enabled.");
         }
 
         // Register join/quit message listener
